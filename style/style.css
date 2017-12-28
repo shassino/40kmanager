@@ -1,0 +1,54 @@
+.hexagon {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: 1;
+}
+
+.hexagon path {
+    -webkit-transition: fill 250ms linear;
+    transition: fill 250ms linear;
+    stroke: #000;
+    stroke-opacity: 1;
+}
+
+.hexagon :hover {
+    fill: rgb(198, 192, 255) !important;
+    stroke: #000;
+    stroke-opacity: 1;
+}
+
+.hexagon .red {
+    fill: red;
+    opacity: 0.5;
+    stroke: #000;
+    stroke-opacity: 1;
+}
+
+.hexagon .blue {
+    fill: blue;
+    opacity: 0.5;
+    stroke: #000;
+    stroke-opacity: 1;
+}
+
+.mesh {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
+    pointer-events: none;
+}
+
+.border {
+    fill: none;
+    stroke: #000;
+    stroke-width: 2px;
+    pointer-events: none;
+}
+
+.zero {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    width: 100%;
+    max-width: 100%;
+}
