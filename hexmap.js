@@ -1,7 +1,3 @@
-var width;
-var height;
-var numHexX;
-
 var topology;
 var projection;
 
@@ -11,11 +7,14 @@ var svg;
 
 var zoom;
 
-numHexX = 10;
-width = window.innerWidth;
-height = (width / numHexX / 1.55) * 2 * Math.sin(Math.PI / 3) * 4.5;
+var numHexX = 10;
+var width = window.innerWidth;
+var radius = width / (numHexX * 3 + 0.5);
+var height = width / 2; //radius * 2 * Math.sin(Math.PI / 3) * 7.5;
+var dy = radius * 2 * Math.sin(Math.PI / 3);
+height = Math.ceil(height / dy) * dy;
 
-var hexes = CalcHex(numHexX, width, height);
+var hexes = CalcHex(radius, width, height);
 
 svg = d3.select("#map")
     .append("svg:svg")
@@ -47,13 +46,12 @@ svg.attr("class", "hexagon")
     .attr("class", "red")
     .on("click", click);
 
-function CalcHex(numHexX, width, height) {
-    var radius = width / numHexX / 1.55;
+function CalcHex(radius, width, height) {
     var dy = radius * 2 * Math.sin(Math.PI / 3);
     var dx = radius * 3;
 
-    var n = Math.floor(width / dx);
-    var m = Math.floor(width / dy);
+    var n = numHexX;//Math.floor(width / (radius * 3.5));
+    var m = Math.floor(height / dy) * 2 - 1;
 
     var vertex = [
         [0.5, -0.866],
