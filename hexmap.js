@@ -8,9 +8,10 @@ var svg;
 var zoom;
 
 var numHexX = 10;
-var width = window.innerWidth;
+var map = d3.select("#map").node();
+var width = map.clientWidth - 20; //window.innerWidth;
 var radius = width / (numHexX * 3 + 0.5);
-var height = width / 2; //radius * 2 * Math.sin(Math.PI / 3) * 7.5;
+var height = width * 9 / 16; //radius * 2 * Math.sin(Math.PI / 3) * 7.5;
 var dy = radius * 2 * Math.sin(Math.PI / 3);
 height = Math.ceil(height / dy) * dy;
 
@@ -33,7 +34,7 @@ svg.append("svg:rect")
     .attr("fill", 'none');
 
 svg.append("image")
-    .attr("xlink:href", "http://best5.it/b5/wp-content/uploads/2014/08/Gli-scoiattoli-il-genere-Tamias-1-800x400-800x400.jpg")
+    .attr("xlink:href", "./mars.jpg")
     .attr("width", width)
     .attr("height", height)
     .attr("preserveAspectRatio", "none");

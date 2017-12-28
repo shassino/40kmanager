@@ -1,3 +1,10 @@
+:root {
+    --top: 60px;
+    --bottom: 60px;
+    --left: 60px;
+    --right: 300px;
+  }
+
 .hexagon {
     fill: none;
     stroke: #000;
@@ -19,14 +26,14 @@
 
 .hexagon .red {
     fill: red;
-    opacity: 0.5;
+    opacity: 0.2;
     stroke: #000;
     stroke-opacity: 1;
 }
 
 .hexagon .blue {
     fill: blue;
-    opacity: 0.5;
+    opacity: 0.2;
     stroke: #000;
     stroke-opacity: 1;
 }
@@ -51,4 +58,61 @@
     border: 0px;
     width: 100%;
     max-width: 100%;
+}
+
+div.map {
+    position: absolute;
+    top: var(--top);
+    bottom: var(--bottom);
+    left: var(--left);
+    right: var(--right);
+    padding: 10px;
+    margin: 0px;
+    border: 0px;
+}
+
+div.top {
+    position: absolute;
+    top: 0px;
+    min-height: var(--top);
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    width: 100%;
+    background-color: black;
+}
+
+div.bottom {
+    position: absolute;
+    bottom: 0px;
+    min-height: var(--bottom);
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    width: 100%;
+    background-color: black;
+}
+
+div.left {
+    position: absolute;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    top: var(--top);
+    bottom: var(--bottom);
+    left: 0px;
+    width: var(--left);
+    background-color: brown;
+}
+
+div.right {
+    position: absolute;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    top : var(--top);
+    bottom: var(--bottom);
+    right: 0px;
+    width: var(--right);
+    background-color: red;
 }
