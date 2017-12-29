@@ -1,6 +1,6 @@
 :root {
     --top: 120px;
-    --bottom: 40px;
+    --bottom: 0px;
     --left: 40px;
     --right: 400px;
   }
@@ -108,7 +108,7 @@ div.bottom {
     bottom: 0px;
     left: var(--left);
     right: 0px;
-    min-height: var(--bottom);
+    height: var(--bottom);
     padding: 0px;
     margin: 0px;
     border: 0px;

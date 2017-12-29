@@ -15,6 +15,9 @@ var height = width * 9 / 16; //radius * 2 * Math.sin(Math.PI / 3) * 7.5;
 var dy = radius * 2 * Math.sin(Math.PI / 3);
 height = Math.ceil(height / dy) * dy;
 
+d3.select("#bottom").style("height", (map.clientHeight - height) + "px");
+d3.select("#right").style("bottom", (map.clientHeight - height) + "px");
+
 var hexes = CalcHex(radius, width, height);
 
 svg = d3.select("#map")
