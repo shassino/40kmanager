@@ -9,7 +9,7 @@ var zoom;
 
 var numHexX = 10;
 var map = d3.select("#map").node();
-var width = map.clientWidth - 20; //window.innerWidth;
+var width = map.clientWidth; //window.innerWidth;
 var radius = width / (numHexX * 3 + 0.5);
 var height = width * 9 / 16; //radius * 2 * Math.sin(Math.PI / 3) * 7.5;
 var dy = radius * 2 * Math.sin(Math.PI / 3);
@@ -144,4 +144,50 @@ function click(d) {
     d3.select(this).classed("red", !d.fill);
     d3.select(this).classed("blue", d.fill);
     d.fill = !d.fill;
+}
+
+/* When the user clicks on the button, toggle between hiding and showing the dropdown content */
+function menuFunction() {
+    var wasOpen = document.getElementById("menuDropdown").classList.contains('show');
+    CloseAllDropdown();
+
+    if (!wasOpen){
+        document.getElementById("menuDropdown").classList.toggle("show");
+    }
+}
+
+function historyFunction() {
+    var wasOpen = document.getElementById("historyDropdown").classList.contains('show');
+    CloseAllDropdown();
+    
+    if (!wasOpen){    
+        document.getElementById("historyDropdown").classList.toggle("show");
+    }
+}
+
+function statsFunction() {
+    var wasOpen = document.getElementById("statsDropdown").classList.contains('show');
+    CloseAllDropdown();
+    
+    if (!wasOpen){    
+        document.getElementById("statsDropdown").classList.toggle("show");
+    }
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+        CloseAllDropdown();
+    }
+}
+
+function CloseAllDropdown() {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+        }
+    }
 }

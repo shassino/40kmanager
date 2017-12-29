@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href='https://fonts.googleapis.com/css?family=Codystar' rel='stylesheet'>
         <link href="style/style.css" rel="stylesheet" type="text/css">
+        <link href="style/menu.css" rel="stylesheet" type="text/css">
         <!-- For mobile devices -->
         <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
     </head>
     <body class="zero">
         <div id="container" class="zero">
+            <div id="bar" class="bar">
+                <div class="dropdown"><img src="./images/warhammer-40000-logo.png" class="logo"></img>
+                </div><div class="dropdown">
+                    <button onclick="menuFunction()" class="dropbtn">Championship Menu</button>
+                    <div id="menuDropdown" class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div><div class="dropdown">
+                    <button onclick="historyFunction()" class="dropbtn">History</button>
+                    <div id="historyDropdown" class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div><div class="dropdown">
+                    <button onclick="statsFunction()" class="dropbtn">Statistics</button>
+                    <div id="statsDropdown" class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+            </div>
             <div id="top" class="top"></div>
             <div id="left" class="left"></div>
             <div id="map" class="map"></div>
