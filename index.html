@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href='https://fonts.googleapis.com/css?family=Codystar' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
         <link href="style/style.css" rel="stylesheet" type="text/css">
         <link href="style/menu.css" rel="stylesheet" type="text/css">
         <!-- For mobile devices -->
@@ -10,7 +10,9 @@
     <body class="zero">
         <div id="container" class="zero">
             <div id="bar" class="bar">
-                <div class="dropdown"><img src="./images/warhammer-40000-logo.png" class="logo"></img>
+                <img src="./images/warhammer-40000-logo.png" class="logo">
+                </img><div class="dropdown">
+                    <a href="./index.html" class="dropbtn">Home</a>
                 </div><div class="dropdown">
                     <button onclick="menuFunction()" class="dropbtn">Championship Menu</button>
                     <div id="menuDropdown" class="dropdown-content">
@@ -32,6 +34,15 @@
                         <a href="#">Link 2</a>
                         <a href="#">Link 3</a>
                     </div>
+                </div><div class="dropdown">
+                        <a href="./login.php" class="dropbtn">Login</a>
+                </div><div class="dropdown">
+                    <button onclick="adminFunction()" class="dropbtn">Admin</button>
+                    <div id="adminDropdown" class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
                 </div>
             </div>
             <div id="top" class="top"></div>
@@ -41,6 +52,7 @@
             <div id="bottom" class="bottom"></div>
         </div>
         <script src="//d3js.org/d3.v4.js"></script>
-        <script src="./hexmap.js"></script>
+        <script src="./js/hexmap.js"></script>
+        <script src="./js/menu.js"></script>
     </body>
 </html>

@@ -52,10 +52,6 @@
     pointer-events: none;
 }
 
-.logo {
-    height: 80px;
-}
-
 .zero {
     padding: 0px;
     margin: 0px;
@@ -88,19 +84,6 @@ div.top {
     border: 0px;
     background-color: black;
     z-index: 1;
-}
-
-div.bar {
-    position: absolute;
-    /*height: 100px;*/
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    padding: 0px;
-    margin: 0px;
-    border: 0px;
-    background-color: blue;
-    z-index: 10;
 }
 
 div.bottom {

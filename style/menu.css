@@ -3,12 +3,15 @@
     --margin: 5px;
 }
 
+a:link {
+    text-decoration: none;
+}
+
 /* Dropdown Button */
 .dropbtn {
     background-color: #4CAF50;
     color: white;
     padding: 10px;
-    font-size: 22px;
     border: none;
     cursor: pointer;
     margin-top: 0px;
@@ -16,9 +19,12 @@
     margin-right: 0px;
     border-radius: var(--radius);
     border: 2px solid rgb(173, 61, 33);
-    font-family: 'Codystar';
-    /*font-weight: 500;*/
-    /*text-transform: uppercase;*/
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    letter-spacing: .06em;
+    -webkit-font-smoothing: antialiased;
 }
 
 .dropbtn:focus {
@@ -34,7 +40,8 @@
 .dropdown {
     position: relative;
     display: inline-block;
-    vertical-align: middle;
+    /*vertical-align: middle;*/
+    top: -33px;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -49,13 +56,16 @@
     z-index: 1;
     border-radius: var(--radius);
     border: 2px solid rgb(173, 61, 33);
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    letter-spacing: .06em;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
-    text-decoration: none;
     display: block;
 }
 
@@ -64,7 +74,27 @@
     background-color: #f1f1f1;
     border-radius: var(--radius);
     border: none;
+    font-weight: 700;
 }
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
+
+.logo {
+    position: relative;
+    display: inline-block;
+    height: 80px;
+}
+
+div.bar {
+    position: absolute;
+    height: 80px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    background-color: blue;
+    z-index: 10;
+}
