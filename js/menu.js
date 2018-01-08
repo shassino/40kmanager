@@ -17,12 +17,12 @@ function historyFunction() {
     }
 }
 
-function statsFunction() {
-    var wasOpen = document.getElementById("statsDropdown").classList.contains('show');
+function userFunction() {
+    var wasOpen = document.getElementById("userDropdown").classList.contains('show');
     CloseAllDropdown();
     
     if (!wasOpen){    
-        document.getElementById("statsDropdown").classList.toggle("show");
+        document.getElementById("userDropdown").classList.toggle("show");
     }
 }
 
