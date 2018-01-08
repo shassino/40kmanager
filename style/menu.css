@@ -1,6 +1,7 @@
 :root {
     --radius: 7px;
     --margin: 5px;
+    --margin-right: 10px;
 }
 
 a:link {
@@ -57,7 +58,7 @@ div.bar {
 }
 
 .dropdown_right {
-    margin-right: 20px;
+    margin-right: var(--margin-right);
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -76,6 +77,10 @@ div.bar {
     font-size: 14px;
     letter-spacing: .06em;
     -webkit-font-smoothing: antialiased;
+}
+
+.dropdown-content-right {
+    right: var(--margin-right);
 }
 
 /* Links inside the dropdown */
