@@ -2,61 +2,20 @@
 <html>
     <head>
         <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-        <link href="style/style.css" rel="stylesheet" type="text/css">
+        <link href="style/main.css" rel="stylesheet" type="text/css">
         <link href="style/menu.css" rel="stylesheet" type="text/css">
+        <link href="style/hexmap.css" rel="stylesheet" type="text/css">
         <!-- For mobile devices -->
-        <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />
-    </head>
-    <body class="zero">
-        <div id="container" class="zero">
-            <div id="bar" class="bar">
-                <img src="./images/warhammer-40000-logo.png" class="logo"></img>
-                <div class="after"></div>              
-                <div><button onclick="location.href='./'" class="dropbtn">Home</button></div>
-                <div onmouseover="menuFunction()" onmouseout="CloseAllDropdown()">
-                    <button class="dropbtn">Championship</button>
-                    <div id="menuDropdown" class="dropdown-content">
-                        <a href="#">Upcoming battles</a>
-                        <a href="#">Recent battles</a>
-                        <a href="#">Forces</a>
-                        <a href="#">Rules</a>
-                    </div>
-                </div>
-                <div onmouseover="historyFunction()" onmouseout="CloseAllDropdown()">
-                    <button class="dropbtn">History</button>
-                    <div id="historyDropdown" class="dropdown-content">
-                        <a href="#">Ranking</a>
-                        <a href="#">Statistics</a>
-                    </div>
-                </div>
-                <div onmouseover="userFunction()" onmouseout="CloseAllDropdown()">
-                    <button class="dropbtn">User</button>
-                    <div id="userDropdown" class="dropdown-content">
-                        <a href="#">Update force</a>
-                        <a href="#">Statistics</a>
-                        <a href="#">Profile</a>
-                        <a href="#">Recent battles</a>
-                    </div>
-                </div>
-                <div><button onclick="location.href='./login.php'" class="dropbtn">Login</button></div>
-                <div onmouseover="adminFunction()" onmouseout="CloseAllDropdown()">
-                    <button class="dropbtn">Admin</button>
-                    <div id="adminDropdown" class="dropdown-content">
-                        <a href="#">Settings</a>
-                        <a href="#">Users</a>
-                        <a href="#">Matches</a>
-                    </div>
-                </div>
-                <div style="margin-right: 10px;"></div>
-            </div>
-            <div id="top" class="top"></div>
-            <div id="left" class="left"></div>
-            <div id="map" class="map"></div>
-            <div id="right" class="right"></div>
-            <div id="bottom" class="bottom"></div>
-        </div>
+        <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <!--<meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, target-densitydpi=device-dpi" />-->
         <script src="//d3js.org/d3.v4.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="./js/main.js"></script>
         <script src="./js/hexmap.js"></script>
         <script src="./js/menu.js"></script>
+    </head>
+    <body class="zero" onload="main()">
+        <div id="bar" class="bar"></div>
+        <div id="container" class="zero"></div>
     </body>
 </html>

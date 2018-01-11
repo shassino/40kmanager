@@ -1,54 +1,58 @@
 var topology;
 var projection;
-
 var path;
-
 var svg;
-
 var zoom;
 
 var numHexX = 10;
-var map = d3.select("#map").node();
-var width = map.clientWidth; //window.innerWidth;
-var radius = width / (numHexX * 3 + 0.5);
-var height = width * 9 / 16; //radius * 2 * Math.sin(Math.PI / 3) * 7.5;
-var dy = radius * 2 * Math.sin(Math.PI / 3);
-height = Math.ceil(height / dy) * dy;
+var map;
+var width;
+var radius;
+var height;
 
-d3.select("#bottom").style("height", (map.clientHeight - height) + "px");
-d3.select("#right").style("bottom", (map.clientHeight - height) + "px");
+function InitHexMap(){
+    map = d3.select("#map").node();
+    width = map.clientWidth; //window.innerWidth;
+    height = width * 9 / 16;
+    radius = width / (numHexX * 3 + 0.5);
+    var dy = radius * 2 * Math.sin(Math.PI / 3);
+    height = Math.ceil(height / dy) * dy;
 
-var hexes = CalcHex(radius, width, height);
+    d3.select("#bottom").style("height", (map.clientHeight - height) + "px");
+    d3.select("#right").style("bottom", (map.clientHeight - height) + "px");
 
-svg = d3.select("#map")
-    .append("svg:svg")
-    .attr("id","svg_1")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("pointer-events", "all")
-    .call(zoom = d3.zoom().on("zoom", rescale))
-    .on("dblclick.zoom", null)
-    .append("svg:g");
+    var hexes = CalcHex(radius, width, height);
 
-svg.append("svg:rect")
-    .attr("id","rect_1")
-    .attr("width", width)
-    .attr("heigh", height)
-    .attr("fill", 'none');
+    svg = d3.select("#map")
+        .append("svg:svg")
+        .attr("id","svg_1")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("pointer-events", "all")
+        .call(zoom = d3.zoom().on("zoom", rescale))
+        .on("dblclick.zoom", null)
+        .append("svg:g");
 
-svg.append("image")
-    .attr("xlink:href", "./mars.jpg")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("preserveAspectRatio", "none");
+    svg.append("svg:rect")
+        .attr("id","rect_1")
+        .attr("width", width)
+        .attr("heigh", height)
+        .attr("fill", 'none');
 
-svg.attr("class", "hexagon")
-    .selectAll("path")
-    .data(hexes.id)
-    .enter().append("path")
-    .attr("d", function(d) { return hexes.d[d]; })
-    .attr("class", "red")
-    .on("click", click);
+    svg.append("image")
+        .attr("xlink:href", "./mars.jpg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("preserveAspectRatio", "none");
+
+    svg.attr("class", "hexagon")
+        .selectAll("path")
+        .data(hexes.id)
+        .enter().append("path")
+        .attr("d", function(d) { return hexes.d[d]; })
+        .attr("class", "red")
+        .on("click", click);
+}
 
 function CalcHex(radius, width, height) {
     var dy = radius * 2 * Math.sin(Math.PI / 3);

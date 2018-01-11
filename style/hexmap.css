@@ -1,0 +1,118 @@
+:root {
+    --top: 120px;
+    --bottom: 0px;
+    --left: 40px;
+    --right: 400px;
+  }
+
+.hexagon {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: 1;
+}
+
+.hexagon path {
+    -webkit-transition: fill 250ms linear;
+    transition: fill 250ms linear;
+    stroke: #000;
+    stroke-opacity: 1;
+}
+
+.hexagon :hover {
+    fill: rgb(198, 192, 255) !important;
+    stroke: #000;
+    stroke-opacity: 1;
+}
+
+.hexagon .red {
+    fill: red;
+    opacity: 0.2;
+    stroke: #000;
+    stroke-opacity: 1;
+}
+
+.hexagon .blue {
+    fill: blue;
+    opacity: 0.2;
+    stroke: #000;
+    stroke-opacity: 1;
+}
+
+.mesh {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
+    pointer-events: none;
+}
+
+.border {
+    fill: none;
+    stroke: #000;
+    stroke-width: 2px;
+    pointer-events: none;
+}
+
+div.map {
+    position: absolute;
+    top: var(--top);
+    bottom: var(--bottom);
+    left: var(--left);
+    right: var(--right);
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    z-index: 1;
+}
+
+div.top {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: var(--right);
+    height: var(--top);
+    max-height: var(--top);
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    background-color: black;
+    z-index: 1;
+}
+
+div.bottom {
+    position: absolute;
+    bottom: 0px;
+    left: var(--left);
+    right: 0px;
+    height: var(--bottom);
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    background-color: black;
+    z-index: 1;
+}
+
+div.left {
+    position: absolute;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    top: var(--top);
+    bottom: 0px;
+    left: 0px;
+    width: var(--left);
+    background-color: brown;
+    z-index: 1;
+}
+
+div.right {
+    position: absolute;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    top : 0px;
+    bottom: var(--bottom);
+    right: 0px;
+    width: var(--right);
+    background-color: red;
+    z-index: 1;
+}
