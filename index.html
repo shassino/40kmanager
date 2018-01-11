@@ -12,9 +12,9 @@
             <div id="bar" class="bar">
                 <img src="./images/warhammer-40000-logo.png" class="logo">
                 </img>
-                <a href="./" class="dropbtn">Home</a>
-                <div>
-                    <button onclick="menuFunction()" class="dropbtn">Championship</button>
+                <div><button onclick="location.href='./'" class="dropbtn">Home</button></div>
+                <div onmouseover="menuFunction()" onmouseout="CloseAllDropdown()">
+                    <button class="dropbtn">Championship</button>
                     <div id="menuDropdown" class="dropdown-content">
                         <a href="#">Upcoming battles</a>
                         <a href="#">Recent battles</a>
@@ -22,15 +22,15 @@
                         <a href="#">Rules</a>
                     </div>
                 </div>
-                <div>
-                    <button onclick="historyFunction()" class="dropbtn">History</button>
+                <div onmouseover="historyFunction()" onmouseout="CloseAllDropdown()">
+                    <button class="dropbtn">History</button>
                     <div id="historyDropdown" class="dropdown-content">
                         <a href="#">Ranking</a>
                         <a href="#">Statistics</a>
                     </div>
                 </div>
-                <div>
-                    <button onclick="userFunction()" class="dropbtn">User</button>
+                <div onmouseover="userFunction()" onmouseout="CloseAllDropdown()">
+                    <button class="dropbtn">User</button>
                     <div id="userDropdown" class="dropdown-content">
                         <a href="#">Update force</a>
                         <a href="#">Statistics</a>
@@ -38,10 +38,10 @@
                         <a href="#">Recent battles</a>
                     </div>
                 </div>
-                <a href="./login.php" class="dropbtn">Login</a>
+                <div><button onclick="location.href='./login.php'" class="dropbtn">Login</button></div>
                 <div class="after"></div>
-                <div class="dropdown_right">
-                    <button onclick="adminFunction()" class="dropbtn">Admin</button>
+                <div class="dropdown_right" onmouseover="adminFunction()" onmouseout="CloseAllDropdown()">
+                    <button class="dropbtn">Admin</button>
                     <div id="adminDropdown" class="dropdown-content dropdown-content-right">
                         <a href="#">Settings</a>
                         <a href="#">Users</a>

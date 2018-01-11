@@ -2,6 +2,7 @@
     --radius: 7px;
     --margin: 5px;
     --margin-right: 10px;
+    --border: 0px;
 }
 
 a:link {
@@ -18,14 +19,15 @@ a:link {
     margin-top: 0px;
     margin-left: var(--margin);
     margin-right: 0px;
-    border-radius: var(--radius);
-    border: 2px solid rgb(173, 61, 33);
+    /*border-radius: var(--radius);*/
+    border: var(--border) solid rgb(173, 61, 33);
     font-weight: 700;
     text-transform: uppercase;
     font-family: 'Lato', sans-serif;
     font-size: 14px;
     letter-spacing: .06em;
     -webkit-font-smoothing: antialiased;
+    width: 160px;  
 }
 
 .dropbtn:focus {
@@ -64,19 +66,20 @@ div.bar {
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
     margin-left: var(--margin);
-    margin-top: var(--margin);
+    margin-top: 0px;/*var(--margin);*/
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
+    width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    border-radius: var(--radius);
-    border: 2px solid rgb(173, 61, 33);
+    /*border-radius: var(--radius);*/
+    border: var(--border) solid rgb(173, 61, 33);
     font-family: 'Lato', sans-serif;
     font-size: 14px;
     letter-spacing: .06em;
     -webkit-font-smoothing: antialiased;
+    text-align: center;
 }
 
 .dropdown-content-right {
@@ -93,7 +96,7 @@ div.bar {
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
     background-color: #f1f1f1;
-    border-radius: var(--radius);
+    /*border-radius: var(--radius);*/
     border: none;
     font-weight: 700;
 }
