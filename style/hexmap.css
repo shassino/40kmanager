@@ -1,8 +1,8 @@
 :root {
-    --top: 120px;
+    --top: 20px;
     --bottom: 0px;
-    --left: 40px;
-    --right: 400px;
+    --left: 20px;
+    --right: 350px;
   }
 
 .hexagon {

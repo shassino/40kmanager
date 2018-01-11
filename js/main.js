@@ -5,7 +5,7 @@ function main(){
 
 function LoadToolBar(){
     /* First fill container html */
-    $("#bar").load("./html/menu.html");
+    $("#toolbar").load("./html/menu.html");
 
     /* Run Map */
     /*InitHexMap();*/
