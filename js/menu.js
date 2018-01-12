@@ -52,3 +52,7 @@ function CloseAllDropdown() {
         }
     }
 }
+
+function OnClickHome() {
+    LoadHome();
+}
