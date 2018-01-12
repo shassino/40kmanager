@@ -1,5 +1,4 @@
-/* When the user clicks on the button, toggle between hiding and showing the dropdown content */
-function menuFunction() {
+function menuFunction(){
     var wasOpen = document.getElementById("menuDropdown").classList.contains('show');
     CloseAllDropdown();
 
@@ -8,7 +7,7 @@ function menuFunction() {
     }
 }
 
-function historyFunction() {
+function historyFunction(){
     var wasOpen = document.getElementById("historyDropdown").classList.contains('show');
     CloseAllDropdown();
     
@@ -17,7 +16,7 @@ function historyFunction() {
     }
 }
 
-function userFunction() {
+function userFunction(){
     var wasOpen = document.getElementById("userDropdown").classList.contains('show');
     CloseAllDropdown();
     
@@ -26,7 +25,7 @@ function userFunction() {
     }
 }
 
-function adminFunction() {
+function adminFunction(){
     var wasOpen = document.getElementById("adminDropdown").classList.contains('show');
     CloseAllDropdown();
     
@@ -35,14 +34,7 @@ function adminFunction() {
     }
 }
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-        CloseAllDropdown();
-    }
-}
-
-function CloseAllDropdown() {
+function CloseAllDropdown(){
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;
     for (i = 0; i < dropdowns.length; i++) {
@@ -53,6 +45,10 @@ function CloseAllDropdown() {
     }
 }
 
-function OnClickHome() {
+function OnClickHome(){
     LoadHome();
+}
+
+function OnClickChampionship(){
+    LoadHexMap();
 }

@@ -30,4 +30,5 @@ a {
 	right: 0px;
 	top: var(--height);
 	bottom: 0px;
+	overflow-y: scroll;
 }
