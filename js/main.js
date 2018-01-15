@@ -23,7 +23,7 @@ function LocationSwitch(newHash) {
             break;
 
         default:
-            //LoadHome();
+            LoadHome();
             break;
     }
 }
