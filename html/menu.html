@@ -4,8 +4,8 @@
     <div>
         <button onclick="OnClickHome()" class="dropbtn rounded">Home</button>
     </div>
-    <div onmouseover="menuFunction()" onmouseout="CloseAllDropdown()">
-        <button class="dropbtn rounded" onclick="OnClickChampionship()">Championship</button>
+    <div onmouseover="OpenDropdown(this)" onmouseout="CloseDropdown(this)">
+        <button class="dropbtn rounded-top rounded-bottom" onclick="OnClickChampionship()">Championship</button>
         <div id="menuDropdown" class="dropdown-content rounded-bottom">
             <a href="#">Upcoming battles</a>
             <a href="#">Recent battles</a>
@@ -13,15 +13,15 @@
             <a href="#">Rules</a>
         </div>
     </div>
-    <div onmouseover="historyFunction()" onmouseout="CloseAllDropdown()">
-        <button class="dropbtn rounded">History</button>
+    <div onmouseover="OpenDropdown(this)" onmouseout="CloseDropdown(this)">
+        <button class="dropbtn rounded-top rounded-bottom">History</button>
         <div id="historyDropdown" class="dropdown-content rounded-bottom">
             <a href="#">Ranking</a>
             <a href="#">Statistics</a>
         </div>
     </div>
-    <div onmouseover="userFunction()" onmouseout="CloseAllDropdown()">
-        <button class="dropbtn rounded">User</button>
+    <div onmouseover="OpenDropdown(this)" onmouseout="CloseDropdown(this)">
+        <button class="dropbtn rounded-top rounded-bottom">User</button>
         <div id="userDropdown" class="dropdown-content rounded-bottom">
             <a href="#">Update force</a>
             <a href="#">Statistics</a>
@@ -32,8 +32,8 @@
     <div>
         <button onclick="location.href='./login.php'" class="dropbtn rounded">Login</button>
     </div>
-    <div onmouseover="adminFunction()" onmouseout="CloseAllDropdown()">
-        <button class="dropbtn rounded">Admin</button>
+    <div onmouseover="OpenDropdown(this)" onmouseout="CloseDropdown(this)">
+        <button class="dropbtn rounded-top rounded-bottom">Admin</button>
         <div id="adminDropdown" class="dropdown-content rounded-bottom">
             <a href="#">Settings</a>
             <a href="#">Users</a>

@@ -1,31 +1,15 @@
-function menuFunction(){
-    OpenDropdown($("#menuDropdown"));
-}
-
-function historyFunction(){
-    OpenDropdown($("#historyDropdown"));
-}
-
-function userFunction(){
-    OpenDropdown($("#userDropdown"));
-}
-
-function adminFunction(){
-    OpenDropdown($("#adminDropdown"));
-}
-
 function OpenDropdown(item){
-    if (!item.hasClass('show')){
-        item.addClass("show");
-    }
+    button = $(item.childNodes[1]);
+    dropdown = $(item.childNodes[3]);
+    button.removeClass('rounded-bottom');
+    dropdown.addClass("show");
 }
 
-function CloseAllDropdown(){
-    $(".dropdown-content").each(function() {
-        if ($(this).hasClass('show')) { //DOM object not jquery one
-            $(this).removeClass('show');
-        }
-    });
+function CloseDropdown(item){
+    button = $(item.childNodes[1]);
+    dropdown = $(item.childNodes[3]);
+    button.addClass('rounded-bottom');
+    dropdown.removeClass("show");
 }
 
 function OnClickHome(){
