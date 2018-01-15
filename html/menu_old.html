@@ -1,0 +1,55 @@
+<div id="bar" class="bar">
+    <img src="./images/warhammer-40000-logo.png" class="logo"></img>
+    <div class="after"></div>              
+    <a href="#home" class="btn btn-dark dropbtn">Home</a>
+    <div onmouseover="OpenDropdown(this)" onmouseout="CloseDropdown(this)">
+        <button class="btn btn-dark dropbtn" onclick="OnClickChampionship()">Championship</button>
+        <div class="dropdown-content rounded-bottom">
+            <a href="#">Upcoming battles</a>
+            <a href="#">Recent battles</a>
+            <a href="#">Forces</a>
+            <a href="#">Rules</a>
+        </div>
+    </div>
+    <div onmouseover="OpenDropdown(this)" onmouseout="CloseDropdown(this)">
+        <button class="btn btn-dark dropbtn">History</button>
+        <div class="dropdown-content rounded-bottom">
+            <a href="#">Ranking</a>
+            <a href="#">Statistics</a>
+        </div>
+    </div>
+    <div onmouseover="OpenDropdown(this)" onmouseout="CloseDropdown(this)">
+        <button class="btn btn-dark dropbtn">User</button>
+        <div class="dropdown-content rounded-bottom">
+            <a href="#">Update force</a>
+            <a href="#">Statistics</a>
+            <a href="#">Profile</a>
+            <a href="#">Recent battles</a>
+        </div>
+    </div>
+    <div class="btn-group dropbtn">
+        <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</button>
+        <div class="dropdown-menu dropdown-menu-right" style="width: 250px;">
+            <form class="px-4 py-3">
+                <div class="form-group">
+                    <label for="InputUsername">Username</label>
+                    <input type="text" class="form-control" id="InputUsername" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label for="InputPassword">Password</label>
+                    <input type="password" class="form-control" id="InputPassword" placeholder="Password" >
+                </div>
+                <button type="button" class="btn btn-dark">Confirm</button>
+            </form>
+        </div>
+    </div>
+    <div onmouseover="OpenDropdown(this)" onmouseout="CloseDropdown(this)">
+        <button class="btn btn-dark dropbtn">Admin</button>
+        <div class="dropdown-content rounded-bottom">
+            <a href="#">Settings</a>
+            <a href="#">Users</a>
+            <a href="#">Matches</a>
+        </div>
+    </div>
+    <div style="margin-right: 10px;"></div>
+</div>

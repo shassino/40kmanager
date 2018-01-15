@@ -13,34 +13,35 @@ a:link {
 
 /* Dropdown Button */
 .dropbtn {
-    background-color: #4CAF50;
+    /*background-color: #4CAF50;*
     color: white;
     padding: 10px;
     border: none;
     cursor: pointer;
-    margin-top: 0px;
+    margin-top: 0px;*/
     margin-left: var(--margin);
     margin-right: 0px;
     /*border-radius: var(--radius);*/
-    border: var(--border) solid rgb(173, 61, 33);
+    /*border: var(--border) solid rgb(173, 61, 33);
     font-weight: 700;
     text-transform: uppercase;
     font-family: 'Lato', sans-serif;
     font-size: var(--font-size);
     letter-spacing: .06em;
-    -webkit-font-smoothing: antialiased;
-    width: var(--width);  
+    -webkit-font-smoothing: antialiased;*/
+    /*width: var(--width);*/
 }
-
+/*
 .dropbtn:focus {
     outline: none;
 }
-
+*/
 /* Dropdown button on hover & focus */
+/*
 .dropbtn:hover {
     background-color: #3e8e41;
 }
-
+*/
 div.bar {
     position: absolute;
     top: 0px;
@@ -111,4 +112,8 @@ div.bar {
 .logo {
     position: relative;
     height: 80px;
+}
+
+.my-input {
+    width: 150px;
 }
