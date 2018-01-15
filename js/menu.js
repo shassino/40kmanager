@@ -6,8 +6,8 @@ function OpenDropdown(item){
 }
 
 function CloseDropdown(item){
-    button = $(item.childNodes[1]);
-    dropdown = $(item.childNodes[3]);
+    button = $(item).children('.dropbtn');
+    dropdown = $(item).children('.dropdown-content');
     button.addClass('rounded-bottom');
     dropdown.removeClass("show");
 }
