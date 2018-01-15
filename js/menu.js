@@ -1,48 +1,31 @@
 function menuFunction(){
-    var wasOpen = document.getElementById("menuDropdown").classList.contains('show');
-    CloseAllDropdown();
-
-    if (!wasOpen){
-        document.getElementById("menuDropdown").classList.toggle("show");
-    }
+    OpenDropdown($("#menuDropdown"));
 }
 
 function historyFunction(){
-    var wasOpen = document.getElementById("historyDropdown").classList.contains('show');
-    CloseAllDropdown();
-    
-    if (!wasOpen){    
-        document.getElementById("historyDropdown").classList.toggle("show");
-    }
+    OpenDropdown($("#historyDropdown"));
 }
 
 function userFunction(){
-    var wasOpen = document.getElementById("userDropdown").classList.contains('show');
-    CloseAllDropdown();
-    
-    if (!wasOpen){    
-        document.getElementById("userDropdown").classList.toggle("show");
-    }
+    OpenDropdown($("#userDropdown"));
 }
 
 function adminFunction(){
-    var wasOpen = document.getElementById("adminDropdown").classList.contains('show');
-    CloseAllDropdown();
-    
-    if (!wasOpen){    
-        document.getElementById("adminDropdown").classList.toggle("show");
+    OpenDropdown($("#adminDropdown"));
+}
+
+function OpenDropdown(item){
+    if (!item.hasClass('show')){
+        item.addClass("show");
     }
 }
 
 function CloseAllDropdown(){
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
+    $(".dropdown-content").each(function() {
+        if ($(this).hasClass('show')) { //DOM object not jquery one
+            $(this).removeClass('show');
         }
-    }
+    });
 }
 
 function OnClickHome(){
