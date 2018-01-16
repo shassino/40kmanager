@@ -12,8 +12,8 @@ define('DBPASS','manager40k');
 define('DBNAME','manager40k');
 
 //application address
-define('DIR','http://37.187.114.240/40kmanager/');
-define('SITEEMAIL','noreply@fondazione.ovh');
+define('DIR','http://lafondazionetorino.it/40kmanager/');
+define('SITEEMAIL','noreply@lafondazionetorino.it');
 
 try {
 
@@ -31,7 +31,7 @@ try {
 }
 
 //include the user class, pass in the database connection
-include('classes/user.php');
-include('classes/phpmailer/mail.php');
+include('php/user.php');
+include('php/phpmailer/mail.php');
 $user = new User($db);
 ?>

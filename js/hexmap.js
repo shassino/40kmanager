@@ -40,7 +40,7 @@ function InitHexMap(){
         .attr("fill", 'none');
 
     svg.append("image")
-        .attr("xlink:href", "./mars.jpg")
+        .attr("xlink:href", "./images/mars.jpg")
         .attr("width", width)
         .attr("height", height)
         .attr("preserveAspectRatio", "none");
