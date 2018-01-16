@@ -1,10 +1,10 @@
 var hash = "#"; /* current hash of the page */
 
-function main(){
+$(function(){
     LoadToolBar();
 
     LocationSwitch(window.location.hash);
-}
+});
 
 $(window).on('hashchange', function() {
     if (hash !== window.location.hash){
@@ -35,10 +35,16 @@ function UpdateHash(newHash){
 
 function LoadToolBar(){
     /* First fill container html */
-    $("#toolbar").load("./html/menu.html");
-
-    /* Run Map */
-    /*InitHexMap();*/
+    $("#toolbar").load("./html/menu.html", function( response, status, xhr ) {
+        if ( status == "error" ) {
+          var msg = "Sorry but there was an error: ";
+          $( "#container" ).html( msg + xhr.status + " " + xhr.statusText );
+        }
+        else {
+            /* Run Menu */
+            OnLoadMenu();
+        }
+    });
 }
 
 function LoadHexMap(){
@@ -65,7 +71,7 @@ function LoadHome(){
           $( "#container" ).html( msg + xhr.status + " " + xhr.statusText );
         }
         else {
-            /* Run Map */
+            /* Run Home */
             /* InitHome(); */
         }
     });
