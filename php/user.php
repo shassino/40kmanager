@@ -1,5 +1,5 @@
 <?php
-include('php/password.php');
+include('password.php');
 class User extends Password{
 
     private $_db;

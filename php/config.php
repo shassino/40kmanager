@@ -1,5 +1,6 @@
 <?php
 ob_start();
+
 session_start();
 
 //set timezone
@@ -31,7 +32,7 @@ try {
 }
 
 //include the user class, pass in the database connection
-include('php/user.php');
-include('php/phpmailer/mail.php');
+include('user.php');
+include('phpmailer/mail.php');
 $user = new User($db);
 ?>

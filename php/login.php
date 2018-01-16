@@ -1,36 +1,43 @@
 <?php
+error_reporting(E_ALL);
+ini_set("error_log", "/home/manager40k/php_errors.log");
+ini_set("display_errors", "On");
+//phpinfo();
 //include config
-require_once('php/config.php');
+require_once('config.php');
+$error = "";
+$post = json_decode(file_get_contents('php://input'));
 
-//process login form if submitted
-if(isset($_POST['submit'])){
-
-	if (!isset($_POST['username'])) $error[] = "Please fill out all fields";
-	if (!isset($_POST['password'])) $error[] = "Please fill out all fields";
-
-	$username = $_POST['username'];
-	if ( $user->isValidUsername($username)){
-		if (!isset($_POST['password'])){
-			$error[] = 'A password must be entered';
-		}
-		$password = $_POST['password'];
-
-		if($user->login($username, $password)){
-			echo $user->getSessionID($username);
-			
-			exit;
-		}
-		else {
-			$error[] = 'Wrong username or password or your account has not been activated.';
-		}
-	}
-	else {
-		$error[] = 'Usernames are required to be Alphanumeric, and between 3-16 characters long';
-	}
-}//end if submit
-else {
-	$error[] = 'this is not a post request';
+if (!isset($post->username)){
+	print("Please fill out all fields");
+	exit;
 }
 
-echo $error;
-exit;
+if (!isset($post->password)){
+	print("Please fill out all fields");
+	exit;
+}
+
+$username = $post->username;
+$password = $post->password;
+print("<br>User: ".$username);
+print("<br>password: ".$password);
+
+
+if ( $user->isValidUsername($username)){
+	/*
+	if($user->login($username, $password)){
+		echo $user->getSessionID($username);
+		
+		exit;
+	}
+	else {
+		$error[] = 'Wrong username or password or your account has not been activated.';
+	}*/
+}
+else {
+	$error = 'Usernames are required to be Alphanumeric, and between 3-16 characters long';
+}
+
+print("Error: ".$error);
+?>
