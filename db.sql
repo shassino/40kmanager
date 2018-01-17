@@ -8,3 +8,12 @@ CREATE TABLE `members` (
   `resetComplete` varchar(3) DEFAULT 'No',
   PRIMARY KEY (`memberID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+CREATE TABLE `sessions` (
+  `sessionID` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `expire` datetime NOT NULL,
+  PRIMARY KEY (`sessionID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+

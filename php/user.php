@@ -13,13 +13,15 @@ class User extends Password{
 	private function get_user_hash($username){
 
 		try {
-			$stmt = $this->_db->prepare('SELECT password, username, memberID FROM members WHERE username = :username AND active="Yes" ');
-			$stmt->execute(array('username' => $username));
+			$queryString = 'SELECT password, username, memberID FROM members WHERE username="'.$username.'" AND active="Yes"';
+			$query = $this->_db->prepare($queryString);
+			$query->execute();
 
-			return $stmt->fetch();
+			return $query->fetch();
 
-		} catch(PDOException $e) {
-		    echo '<p class="bg-danger">'.$e->getMessage().'</p>';
+		} 
+		catch(PDOException $e) {
+		    echo '<p>get_user_hash: '.$e->getMessage().'</p>';
 		}
 	}
 
@@ -30,19 +32,21 @@ class User extends Password{
 		return true;
 	}
 
-	public function login($username,$password){
-		if (!$this->isValidUsername($username)) return false;
-		if (strlen($password) < 3) return false;
+	public function login($username, $password){
+		if (!$this->isValidUsername($username)){
+			return false;
+		}
+
+		if (strlen($password) < 3){
+			return false;
+		}
 
 		$row = $this->get_user_hash($username);
 
-		if($this->password_verify($password,$row['password']) == 1){
-
-		    $_SESSION['loggedin'] = true;
-		    $_SESSION['username'] = $row['username'];
-		    $_SESSION['memberID'] = $row['memberID'];
+		if($this->password_verify($password, $row['password']) == 1){
 		    return true;
 		}
+		return false;
 	}
 
 	public function logout(){
@@ -55,6 +59,45 @@ class User extends Password{
 		}
 	}
 
+	public function setSessionID($username){
+		$uuid = uniqid();
+		$this->deleteExpiredSessions();
+		try {
+			$queryString = 'INSERT INTO sessions (username, uuid, expire) VALUES("'.$username.'", "'.$uuid.'", NOW() + INTERVAL 2 HOUR)';
+			$query = $this->_db->prepare($queryString);
+			$query->execute();
+		} 
+		catch(PDOException $e) {
+			echo '<p>setSessionID: '.$e->getMessage().'</p>';
+			return;
+		}
+
+		return $uuid;
+	}
+	
+	public function getUserFromSessionID($uuid){
+		$this->deleteExpiredSessions();
+
+		try {
+			$queryString = 'SELECT username, FROM sessions WHERE uuid="'.$uuid.'"';
+			$query = $this->_db->prepare($queryString);
+			$query->execute();
+			return $query->fetch();
+		} 
+		catch(PDOException $e) {
+		    echo '<p>getUserFromSessionID: '.$e->getMessage().'</p>';
+		}
+	}
+
+	private function deleteExpiredSessions(){
+		try {
+			$query = $this->_db->prepare('DELETE FROM sessions WHERE expire < NOW()');
+			$query->execute();
+		} 
+		catch(PDOException $e) {
+			echo '<p>deleteExpiredSessions: '.$e->getMessage().'</p>';
+		}
+	}
 }
 
 
