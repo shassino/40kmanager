@@ -31,12 +31,19 @@ function LoadLoginDropdown(){
         $.post("./php/login.php", JSON.stringify(values), function(data, status, xhr){
             if (status == "error"){
                 //handle failure
-                console.log(status);
-                LoadLoginFailedDropdown();
+                LoadLoginFailedDropdown("Unable to contact server");
             }
             else {
-                sessionId = data;
-                LoadLogoutDropdown(values["username"]);
+                if (data.indexOf("Error") >= 0){
+                    LoadLoginFailedDropdown(data);
+                }
+                else {
+                    sessionId = data;
+                    LoadLogoutDropdown(values["username"]);
+                    setTimeout(function(){
+                        $("#navbarLoginDropdown").click();
+                    }, 500);
+                }
             }
         });
 
@@ -44,9 +51,13 @@ function LoadLoginDropdown(){
     });
 }
 
-function LoadLoginFailedDropdown(){
+function LoadLoginFailedDropdown(error){
     LoadLoginDropdown();
-    $("#loginDropdown").append("<br>Username or password invalid");
+    $("#loginDropdown").append(
+        '<div style="padding-left: 10px; padding-right: 10px;">'+
+            '<p>' + error + '</p>'+
+        '</div>'
+        );
 }
 
 function LoadLogoutDropdown(username){
