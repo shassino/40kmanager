@@ -9,11 +9,11 @@ function LoadLoginDropdown(){
         '<form class="px-4 py-3" id="loginForm" method="post" action="login.php" role="form">'+
             '<div class="form-group">'+
                 '<label for="InputUsername">Username</label>'+
-                '<input type="text" name="username" class="form-control" id="InputUsername" placeholder="Username">'+
+                '<input type="text" name="username" class="form-control" id="InputUsername" placeholder="Enter username">'+
             '</div>'+
             '<div class="form-group">'+
                 '<label for="InputPassword">Password</label>'+
-                '<input type="password" name="password" class="form-control" id="InputPassword" placeholder="Password">'+
+                '<input type="password" name="password" class="form-control" id="InputPassword" placeholder="Enter password">'+
             '</div>'+
             '<button type="submit" class="btn btn-dark">Confirm</button>'+
         '</form>'

@@ -4,6 +4,11 @@ require_once('includes/config.php');
 $error = "";
 $post = json_decode(file_get_contents('php://input'));
 
+if (!isset($post->session)){
+	echo 'Error: Please fill out all fields';
+	exit;
+}
+
 if (!isset($post->username)){
 	echo 'Error: Please fill out all fields';
 	exit;
@@ -14,8 +19,18 @@ if (!isset($post->password)){
 	exit;
 }
 
+if (!isset($post->passwordCopy)){
+	echo 'Error: Please fill out all fields';
+	exit;
+}
+
 if (!isset($post->email)){
 	echo 'Error: Please fill out all fields';
+	exit;
+}
+
+if ($post->password != $post->passwordCopy){
+	echo 'Error: Password do not match';
 	exit;
 }
 
@@ -25,7 +40,7 @@ if(!$user->isValidUsername($post->username)){
 	exit;
 } else {
 	$query = $db->prepare('SELECT username FROM members WHERE username = :username');
-	$query->execute(array(':username' => $username));
+	$query->execute(array(':username' => $post->username));
 	$row = $query->fetch(PDO::FETCH_ASSOC);
 
 	if(!empty($row['username'])){
@@ -45,7 +60,7 @@ if(!filter_var($post->email, FILTER_VALIDATE_EMAIL)){
 	exit;
 } else {
 	$query = $db->prepare('SELECT email FROM members WHERE email = :email');
-	$query->execute(array(':email' => $email));
+	$query->execute(array(':email' => $post->email));
 	$row = $query->fetch(PDO::FETCH_ASSOC);
 
 	if(!empty($row['email'])){
@@ -54,25 +69,26 @@ if(!filter_var($post->email, FILTER_VALIDATE_EMAIL)){
 	}
 }
 
+
 //hash the password
 $hashedpassword = $user->password_hash($post->password, PASSWORD_BCRYPT);
 
 try {
 	//insert into database with a prepared statement
-	$stmt = $db->prepare('INSERT INTO members (username,password,email,active) VALUES (:username, :password, :email, :active)');
-	$stmt->execute(array(
-		':username' => $username,
+	$query = $db->prepare('INSERT INTO members (username,password,email,active) VALUES (:username, :password, :email, :active)');
+	$query->execute(array(
+		':username' => $post->username,
 		':password' => $hashedpassword,
-		':email' => $email,
+		':email' => $post->email,
 		':active' => 'Yes'
 	));
 	$id = $db->lastInsertId('memberID');
 
-	echo 'OK'
+	echo 'OK';
 } 
 catch(PDOException $e) {
 	//else catch the exception and show the error.
-	echo 'Error: '.$e->getMessage();
+	print('Error: '.$e->getMessage());
 }
 
 ?>
