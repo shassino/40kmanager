@@ -40,9 +40,7 @@ function LoadLoginDropdown(){
                 else {
                     sessionId = data;
                     LoadLogoutDropdown(values["username"]);
-                    setTimeout(function(){
-                        $("#navbarLoginDropdown").click();
-                    }, 500);
+                    $("#navbarLoginDropdown").click();
                 }
             }
         });
@@ -68,6 +66,36 @@ function LoadLogoutDropdown(username){
         '</div>');//do something on success
 
     $("#logoutButton").click(function(){
-        alert("clicked logout");
+        var values = {};
+        values["session"] = sessionId;
+
+        $.post("./php/logout.php", JSON.stringify(values), function(data, status, xhr){
+            if (status == "error"){
+                //handle failure
+                LoadLogoutFailedDropdown("Unable to contact server");
+            }
+            else {
+                if (data.indexOf("OK") >= 0){
+                    sessionId = "";
+                    LoadLoginDropdown();
+                }
+                else {
+                    LoadLogoutFailedDropdown(data);
+                }
+            }
+        });
     })
+}
+
+function LoadLogoutFailedDropdown(error){
+    LoadLoginDropdown();
+    $("#loginDropdown").append(
+        '<div style="padding-left: 10px; padding-right: 10px;">'+
+            '<p>' + error + '</p>'+
+        '</div>'
+        );
+}
+
+function GetSessionId(){
+    return sessionId;
 }

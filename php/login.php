@@ -1,19 +1,16 @@
 <?php
-error_reporting(E_ALL);
-ini_set("error_log", "/home/manager40k/php_errors.log");
-ini_set("display_errors", "On");
+require_once('includes/config.php');
 
-require_once('config.php');
 $error = "";
 $post = json_decode(file_get_contents('php://input'));
 
 if (!isset($post->username)){
-	print("Please fill out all fields");
+	print("Error: Please fill out all fields");
 	exit;
 }
 
 if (!isset($post->password)){
-	print("Please fill out all fields");
+	print("Error: Please fill out all fields");
 	exit;
 }
 
