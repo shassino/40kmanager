@@ -14,6 +14,10 @@ $(window).on('hashchange', function() {
 
 function LocationSwitch(newHash) {
     switch (newHash) {
+        case "#admuser":
+            LoadAdmUser();
+            break;
+
         case "#hexmap":
             LoadHexMap();
             break;
@@ -73,6 +77,21 @@ function LoadHome(){
         else {
             /* Run Home */
             /* InitHome(); */
+        }
+    });
+}
+
+function LoadAdmUser(){
+    UpdateHash("#admuser");
+    /* First fill container html */
+    $("#container").load("./html/admuser.html", function( response, status, xhr ) {
+        if ( status == "error" ) {
+          var msg = "Sorry but there was an error: ";
+          $( "#container" ).html( msg + xhr.status + " " + xhr.statusText );
+        }
+        else {
+            /* Then Run */
+            OnAdmUserLoad();
         }
     });
 }

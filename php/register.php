@@ -57,9 +57,6 @@ if(!filter_var($post->email, FILTER_VALIDATE_EMAIL)){
 //hash the password
 $hashedpassword = $user->password_hash($post->password, PASSWORD_BCRYPT);
 
-//create the activasion code
-$activasion = md5(uniqid(rand(), true));
-
 try {
 	//insert into database with a prepared statement
 	$stmt = $db->prepare('INSERT INTO members (username,password,email,active) VALUES (:username, :password, :email, :active)');
