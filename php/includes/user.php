@@ -77,17 +77,19 @@ class User extends Password{
 		return $uuid;
 	}
 	
-	public function getUserFromSessionID($uuid){
+	private function getUserFromSessionID($uuid){
 		$this->deleteExpiredSessions();
-
+		error_log("Received uuid: ".$uuid);
 		try {
-			$queryString = 'SELECT username, FROM sessions WHERE uuid="'.$uuid.'"';
+			$queryString = 'SELECT username FROM sessions WHERE uuid="'.$uuid.'"';
+			error_log("Query: ".$queryString);
 			$query = $this->_db->prepare($queryString);
 			$query->execute();
-			return $query->fetch();
+			$result = $query->fetch();
+			return $result['username'];
 		} 
 		catch(PDOException $e) {
-		    echo '<p>getUserFromSessionID: '.$e->getMessage().'</p>';
+		    error_log('getUserFromSessionID: '.$e->getMessage());
 		}
 	}
 
@@ -98,6 +100,36 @@ class User extends Password{
 		} 
 		catch(PDOException $e) {
 			echo '<p>deleteExpiredSessions: '.$e->getMessage().'</p>';
+		}
+	}
+
+	public function getUserLevel($uuid){
+		$username = $this->getUserFromSessionID($uuid);
+		error_log("Got username: ".$username);
+		try {
+			$query = $this->_db->prepare('SELECT level FROM levels WHERE username="'.$username.'"');
+			$query->execute();
+			$result = $query->fetch();
+			error_log("Got level: ".$result['level']);
+			return $result['level'];
+		} 
+		catch(PDOException $e) {
+			error_log('getUserLevel: '.$e->getMessage());
+		}
+	}
+
+	public function getUsersAndLevels(){
+		try {
+			$query = $this->_db->prepare('SELECT username,level FROM levels');
+			$query->execute();
+			$results = array();
+			while ($row = $query->fetch()) {
+				array_push($results, $row);
+			}
+			return $results;
+		} 
+		catch(PDOException $e) {
+			error_log('getUsersAndLevels: '.$e->getMessage());
 		}
 	}
 }

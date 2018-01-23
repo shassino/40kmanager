@@ -17,3 +17,10 @@ CREATE TABLE `sessions` (
   PRIMARY KEY (`sessionID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
+CREATE TABLE `levels` (
+  `memberID` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `level` int(8) NOT NULL,
+  PRIMARY KEY (`memberID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+

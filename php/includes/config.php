@@ -38,6 +38,7 @@ try {
 
 //include the user class, pass in the database connection
 include('includes/user.php');
+include('includes/utils.php');
 include('phpmailer/mail.php');
 $user = new User($db);
 ?>

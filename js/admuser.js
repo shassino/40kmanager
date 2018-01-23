@@ -61,25 +61,23 @@ function AdmUserLog(text){
 
 function FillDelete(users){
     var div = $("#deleteUserDiv");
-    div.html(
+    var html =
         '<form id="deleteUserForm">'+
             '<div class="form-group">'+
                 '<label for="userSelector">Users to be deleted</label>'+
-                '<select multiple class="form-control" id="userSelector">'
-    );
+                '<select multiple class="form-control" id="userSelector">';
 
     for (var user of users){
-        div.append(
-                    '<option>'+user.name+'<option>'
-        );
+        html +=     '<option>'+user.name+'<option>';
     }
 
-    div.append(
+    html +=
                 '</select>'+
             '</div>'+
             '<button type="submit" class="btn btn-dark">Confirm</button>'+
-        '</form>'
-    );
+        '</form>';
+    
+    div.html(html);
 
     $("#deleteUserForm").submit(function(e){
         form = $('#deleteUserForm :input');
@@ -95,37 +93,31 @@ function FillDelete(users){
 
 function FillLevel(users){
     var div = $('#manageUserDiv');
-    div.html(
-        '<form id="manageUserForm">'
-    );
-
     var levels = ['Admin', 'User'];
+    var html = 
+        '<form id="manageUserForm">';
 
     for (var user of users){
-        div.append(
+        html +=
             '<div class="form-row">'+
-                '<div class="form-group col-md-8">'+
-                '</div>'+
+                '<div class="form-group col-md-8">'+user.name+'</div>'+
                 '<div class="form-group col-md-4">'+
-                '<select class="form-control">'
-        );
+                '<select class="form-control">';
 
         for (var level of levels){
-            div.append(
-                ((user.level === level) ? '<option selected>' : '<option>')+
-                level+'</option>'
-            );
+            html +=
+                    ((user.level === level) ? '<option selected>' : '<option>')+level+'</option>';
         }
-        div.append(
+        html +=
                 '</select>'+
-            '</div>'
-        );
+            '</div>';
     }
 
-    div.append(
+    html +=
             '<button type="submit" class="btn btn-dark">Confirm</button>'+
-        '</form>'
-    );
+        '</form>';
+    
+    div.html(html);
 
     $("#manageUserForm").submit(function(e){
         form = $('#manageUserForm :input');
