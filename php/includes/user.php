@@ -13,7 +13,7 @@ class User extends Password{
 	private function get_user_hash($username){
 
 		try {
-			$queryString = 'SELECT password, username, memberID FROM members WHERE username="'.$username.'" AND active="Yes"';
+			$queryString = 'SELECT password, username, memberID FROM members WHERE username="'.$username.'"';
 			$query = $this->_db->prepare($queryString);
 			$query->execute();
 

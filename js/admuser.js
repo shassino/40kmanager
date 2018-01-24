@@ -17,12 +17,13 @@ function OnAdmUserLoad(){
                 AdmUserLog('Unable to contact server');
             }
             else {
-                if (data.indexOf('OK') >= 0){
+                var response = JSON.parse(data);
+                if (response.status === "OK"){
                     AdmUserLog('User: ' + values['username'] + ' correctly created');
                     AdmUserInit();
                 }
                 else {
-                    AdmUserLog(data);
+                    AdmUserLog(response.status);
                 }
             }
         });
@@ -64,11 +65,11 @@ function FillDelete(users){
     var html =
         '<form id="deleteUserForm">'+
             '<div class="form-group">'+
-                '<label for="userSelector">Users to be deleted</label>'+
+                '<label for="userSelector" class="form-label-sm">Users to be deleted</label>'+
                 '<select multiple class="form-control" id="userSelector">';
 
     for (var user of users){
-        html +=     '<option>'+user.name+'<option>';
+        html +=     '<option>'+user.name+'</option>';
     }
 
     html +=
@@ -93,27 +94,30 @@ function FillDelete(users){
 
 function FillLevel(users){
     var div = $('#manageUserDiv');
-    var levels = LEVELS_STRINGS;
     var html = 
-        '<form id="manageUserForm">';
-
+        '<form id="manageUserForm">'+
+            '<div class="form-group">';
+    var counter = 1;
     for (var user of users){
         html +=
-            '<div class="form-row">'+
-                '<div class="form-group col-md-8">'+user.name+'</div>'+
-                '<div class="form-group col-md-4">'+
-                '<select class="form-control">';
+                ((counter) ? '<div class="row listUser" style="background-color: #ebebeb;">' : '<div class="row listUser">')+
+                    '<label for="select'+user.name+'" class="col-sm-8 col-form-label-sm" style="margin-bottom: 0px !important;">'+user.name+'</label>'+
+                    '<div class="col-sm-4">'+
+                        '<select id="select'+user.name+'" class="form-control-sm">';
 
-        for (var level of levels){
+        for (var level of LEVELS_STRINGS){
             html +=
-                    ((user.level === level) ? '<option selected>' : '<option>')+level+'</option>';
+                    ((Number(user.level) === LEVELS[level]) ? '<option selected>' : '<option>')+level+'</option>';
         }
         html +=
-                '</select>'+
-            '</div>';
-    }
+                        '</select>'+
+                    '</div>'+
+                '</div>';
+            counter = !counter;
+        }
 
     html +=
+            '</div>'+                
             '<button type="submit" class="btn btn-dark">Confirm</button>'+
         '</form>';
     

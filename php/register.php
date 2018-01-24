@@ -4,68 +4,76 @@ require_once('includes/config.php');
 $error = "";
 $post = json_decode(file_get_contents('php://input'));
 
+class Response {
+	public $status = "OK";
+}
+
+$response = new Response;
+
 if (!isset($post->session)){
-	echo 'Error: Please fill out all fields';
-	exit;
+	$response->status = 'Error: Please fill out all fields';
+	SendJson($response);
 }
 
 if (!isset($post->username)){
-	echo 'Error: Please fill out all fields';
-	exit;
+	$response->status = 'Error: Please fill out all fields';
+	SendJson($response);
 }
 	
 if (!isset($post->password)){
-	echo 'Error: Please fill out all fields';
-	exit;
+	$response->status = 'Error: Please fill out all fields';
+	SendJson($response);
 }
 
 if (!isset($post->passwordCopy)){
-	echo 'Error: Please fill out all fields';
-	exit;
+	$response->status = 'Error: Please fill out all fields';
+	SendJson($response);
 }
 
 if (!isset($post->email)){
-	echo 'Error: Please fill out all fields';
-	exit;
+	$response->status = 'Error: Please fill out all fields';
+	SendJson($response);
 }
 
 if ($post->password != $post->passwordCopy){
-	echo 'Error: Password do not match';
-	exit;
+	$response->status = 'Error: Password do not match';
+	SendJson($response);
 }
 
 //very basic validation
 if(!$user->isValidUsername($post->username)){
-	echo 'Error: Usernames must be at least 3 Alphanumeric characters';
-	exit;
-} else {
+	$response->status = 'Error: Usernames must be at least 3 Alphanumeric characters';
+	SendJson($response);
+} 
+else {
 	$query = $db->prepare('SELECT username FROM members WHERE username = :username');
 	$query->execute(array(':username' => $post->username));
 	$row = $query->fetch(PDO::FETCH_ASSOC);
 
 	if(!empty($row['username'])){
-		echo 'Error: Username provided is already in use.';
-		exit;
+		$response->status = 'Error: Username provided is already in use.';
+		SendJson($response);
 	}
 }
 
 if(strlen($post->password) < 3){
-	echo 'Error: Password is too short.';
-	exit;
+	$response->status = 'Error: Password is too short.';
+	SendJson($response);
 }
 
 //email validation
 if(!filter_var($post->email, FILTER_VALIDATE_EMAIL)){
-	echo 'Error: Please enter a valid email address';
-	exit;
-} else {
+	$response->status = 'Error: Please enter a valid email address';
+	SendJson($response);
+} 
+else {
 	$query = $db->prepare('SELECT email FROM members WHERE email = :email');
 	$query->execute(array(':email' => $post->email));
 	$row = $query->fetch(PDO::FETCH_ASSOC);
 
 	if(!empty($row['email'])){
-		echo 'Error: Email provided is already in use.';
-		exit;
+		$response->status = 'Error: Email provided is already in use.';
+		SendJson($response);
 	}
 }
 
@@ -75,20 +83,23 @@ $hashedpassword = $user->password_hash($post->password, PASSWORD_BCRYPT);
 
 try {
 	//insert into database with a prepared statement
-	$query = $db->prepare('INSERT INTO members (username,password,email,active) VALUES (:username, :password, :email, :active)');
+	$query = $db->prepare('INSERT INTO members (username,password,email) VALUES (:username, :password, :email)');
 	$query->execute(array(
 		':username' => $post->username,
 		':password' => $hashedpassword,
 		':email' => $post->email,
-		':active' => 'Yes'
 	));
-	$id = $db->lastInsertId('memberID');
+	error_log("Created user: ".$post->username);
 
-	echo 'OK';
+	//insert a default inactive level to the user
+	$query = $db->prepare('INSERT INTO levels (username,level) VALUES ("'.$post->username.'", '.Levels::Inactive.')');
+	$query->execute(array());
+	error_log("Assigned to user the level : ".Levels::Inactive);
 } 
 catch(PDOException $e) {
 	//else catch the exception and show the error.
-	print('Error: '.$e->getMessage());
+	$response->status = 'Error: '.$e->getMessage();
 }
 
+SendJson($response);
 ?>
