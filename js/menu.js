@@ -1,7 +1,13 @@
+var LEVELS = Object.freeze({"Inactive":-1, "Admin":0, "User":1});
+var LEVELS_STRINGS = ["Inactive", "Admin", "User"];
 var sessionId = "";
+var userLevel = LEVELS.Inactive;
+
+//If this change update utils.php
 
 function OnLoadMenu() {
     LoadLoginDropdown(); //Fill login dropdown
+    DisableAdmin();
 };
 
 function LoadLoginDropdown(){
@@ -34,13 +40,19 @@ function LoadLoginDropdown(){
                 LoadLoginFailedDropdown("Unable to contact server");
             }
             else {
-                if (data.indexOf("Error") >= 0){
-                    LoadLoginFailedDropdown(data);
+                response = JSON.parse(data);
+                if (response.status != "OK"){
+                    LoadLoginFailedDropdown(response.status);
                 }
                 else {
-                    sessionId = data;
+                    sessionId = response.session;
+                    userLevel = Number(response.level);
                     LoadLogoutDropdown(values["username"]);
                     $("#navbarLoginDropdown").click();
+                    if (userLevel === LEVELS.Admin){
+                        //Enable Admin menu
+                        EnableAdmin();
+                    }
                 }
             }
         });
@@ -77,7 +89,9 @@ function LoadLogoutDropdown(username){
             else {
                 if (data.indexOf("OK") >= 0){
                     sessionId = "";
+                    userLevel = LEVELS.Inactive;
                     LoadLoginDropdown();
+                    DisableAdmin();
                 }
                 else {
                     LoadLogoutFailedDropdown(data);
@@ -98,4 +112,12 @@ function LoadLogoutFailedDropdown(error){
 
 function GetSessionId(){
     return sessionId;
+}
+
+function EnableAdmin(){
+    $("#adminMenuItem").removeClass("hidden");
+}
+
+function DisableAdmin(){
+    $("#adminMenuItem").addClass("hidden");
 }

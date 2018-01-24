@@ -93,7 +93,7 @@ function FillDelete(users){
 
 function FillLevel(users){
     var div = $('#manageUserDiv');
-    var levels = ['Admin', 'User'];
+    var levels = LEVELS_STRINGS;
     var html = 
         '<form id="manageUserForm">';
 

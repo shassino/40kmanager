@@ -4,29 +4,37 @@ require_once('includes/config.php');
 $error = "";
 $post = json_decode(file_get_contents('php://input'));
 
+class Response {
+    public $status = "OK";
+	public $session = "";
+	public $level = -1;
+}
+
+$response = new Response;
+
 if (!isset($post->username)){
-	print("Error: Please fill out all fields");
-	exit;
+	$response->status = "Error: Please fill out all fields";
+	SendJson($response);
 }
 
 if (!isset($post->password)){
-	print("Error: Please fill out all fields");
-	exit;
+	$response->status = "Error: Please fill out all fields";
+	SendJson($response);
 }
 
 if ( $user->isValidUsername($post->username)){
 	
 	if($user->login($post->username, $post->password)){
-		echo $user->setSessionID($post->username);
-		exit;
+		$response->session = $user->setSessionID($post->username);
+		$response->level = $user->getUserLevel($response->session);
 	}
 	else {
-		$error = 'Wrong username or password or your account has not been activated.';
+		$response->status = 'Error: Wrong username or password or your account has not been activated.';
 	}
 }
 else {
-	$error = 'Usernames are required to be Alphanumeric, and between 3-16 characters long';
+	$response->status = 'Error: Usernames are required to be Alphanumeric, and between 3-16 characters long';
 }
 
-print("Error: ".$error);
+SendJson($response);
 ?>

@@ -9,4 +9,5 @@ abstract class Levels{
     const Admin = 0;
     const User = 1;
 }
+
 ?>

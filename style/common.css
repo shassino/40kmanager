@@ -2,3 +2,7 @@
     height: 38px;
     padding-top: 6px !important;
 }
+
+.hidden {
+    display: none;
+}
