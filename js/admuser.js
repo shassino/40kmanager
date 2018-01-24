@@ -81,13 +81,48 @@ function FillDelete(users){
     div.html(html);
 
     $("#deleteUserForm").submit(function(e){
-        form = $('#deleteUserForm :input');
+        form = $('#deleteUserForm option:selected');
+        
         var values = {};
+        values.session = sessionId;
         values.users = new Array();
         form.each(function() {
-            values.users.append(this.value);
-        })
+            values.users.push(this.value);
+        });
 
+        var text = "Sicuro di voler cancellare gli utenti: ";
+        $(values.users).each(function() {
+            text += this + " ";
+        });
+        $('#ModalLabel').html("Confirm deletion");
+        $('#modalBody').html(text);
+        $('#modalFooter').html(
+            '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>'+
+            '<button type="button" class="btn btn-primary" id="modalConfirm" data-dismiss="modal">Apply</button>'
+        );
+        $('#modalConfirm').click(function(){
+            $.post("./php/userdelete.php", JSON.stringify(values), function(data, status, xhr){
+                if (status == "error"){
+                    //handle failure
+                    AdmUserLog('Unable to contact server');
+                }
+                else {
+                    var response = JSON.parse(data);
+                    if (response.status === "OK"){
+                        FillDelete(response.users);
+                        FillLevel(response.users);
+                        AdmUserLog("Users correctly deleted");
+                    }
+                    else {
+                        AdmUserLog(response.status);
+                    }
+                }
+            }).fail(function(){ 
+                // Handle error here
+                AdmUserLog('Unable to complete request. 404?');
+            });
+        });
+        $('#myModal').modal('show');
         e.preventDefault();
     });
 }
@@ -128,7 +163,7 @@ function FillLevel(users){
         var values = {};
         values.users = new Array();
         form.each(function() {
-            values.users.append({"level": this.value, "name": "pippo"});
+            values.users.push({"level": this.value, "name": "pippo"});
         })
 
         e.preventDefault();

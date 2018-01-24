@@ -15,7 +15,12 @@ $(window).on('hashchange', function() {
 function LocationSwitch(newHash) {
     switch (newHash) {
         case "#admuser":
-            LoadAdmUser();
+            if (userLevel === LEVELS.Admin){
+                LoadAdmUser();
+            }
+            else {
+                LoadHome();
+            }
             break;
 
         case "#hexmap":
