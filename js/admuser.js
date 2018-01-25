@@ -90,10 +90,11 @@ function FillDelete(users){
             values.users.push(this.value);
         });
 
-        var text = "Sicuro di voler cancellare gli utenti: ";
+        var text = "Are you sure to delete the following users?<ul>";
         $(values.users).each(function() {
-            text += this + " ";
+            text += "<li>" + this + "</li>";
         });
+        text += "</ul>Once applied this cannot be undone."
         $('#ModalLabel').html("Confirm deletion");
         $('#modalBody').html(text);
         $('#modalFooter').html(
@@ -109,9 +110,8 @@ function FillDelete(users){
                 else {
                     var response = JSON.parse(data);
                     if (response.status === "OK"){
-                        FillDelete(response.users);
-                        FillLevel(response.users);
                         AdmUserLog("Users correctly deleted");
+                        AdmUserInit();
                     }
                     else {
                         AdmUserLog(response.status);
