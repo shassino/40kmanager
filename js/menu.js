@@ -92,6 +92,7 @@ function LoadLogoutDropdown(username){
                     userLevel = LEVELS.Inactive;
                     LoadLoginDropdown();
                     DisableAdmin();
+                    LoadHome();
                 }
                 else {
                     LoadLogoutFailedDropdown(data);

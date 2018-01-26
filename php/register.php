@@ -9,11 +9,7 @@ class Response {
 }
 
 $response = new Response;
-
-if (!isset($post->session)){
-	$response->status = 'Error: Please fill out all fields';
-	SendJson($response);
-}
+include('includes/requireAdmin.php');
 
 if (!isset($post->username)){
 	$response->status = 'Error: Please fill out all fields';

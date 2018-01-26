@@ -66,7 +66,7 @@ function FillDelete(users){
         '<form id="deleteUserForm">'+
             '<div class="form-group">'+
                 '<label for="userSelector" class="form-label-sm">Users to be deleted</label>'+
-                '<select multiple class="form-control" id="userSelector">';
+                '<select multiple class="form-control" id="userSelector" style="overflow-y: auto !important; height: ' + (14 + 22 * users.length) + 'px;">';
 
     for (var user of users){
         html +=     '<option>'+user.name+'</option>';
@@ -90,10 +90,11 @@ function FillDelete(users){
             values.users.push(this.value);
         });
 
-        var text = "Sicuro di voler cancellare gli utenti: ";
+        var text = "Are you sure to delete the following users?<ul>";
         $(values.users).each(function() {
-            text += this + " ";
+            text += "<li>" + this + "</li>";
         });
+        text += "</ul>Once applied this cannot be undone."
         $('#ModalLabel').html("Confirm deletion");
         $('#modalBody').html(text);
         $('#modalFooter').html(
@@ -109,9 +110,8 @@ function FillDelete(users){
                 else {
                     var response = JSON.parse(data);
                     if (response.status === "OK"){
-                        FillDelete(response.users);
-                        FillLevel(response.users);
                         AdmUserLog("Users correctly deleted");
+                        AdmUserInit();
                     }
                     else {
                         AdmUserLog(response.status);
@@ -136,9 +136,9 @@ function FillLevel(users){
     for (var user of users){
         html +=
                 ((counter) ? '<div class="row listUser" style="background-color: #ebebeb;">' : '<div class="row listUser">')+
-                    '<label for="select'+user.name+'" class="col-sm-8 col-form-label-sm" style="margin-bottom: 0px !important;">'+user.name+'</label>'+
-                    '<div class="col-sm-4">'+
-                        '<select id="select'+user.name+'" name="'+user.name+'" class="form-control-sm">';
+                    '<label for="select'+user.name+'" class="col-sm-7 col-form-label-sm" style="margin-bottom: 0px !important; width: 100% !important;">'+user.name+'</label>'+
+                    '<div class="col-sm-5">'+
+                        '<select id="select'+user.name+'" name="'+user.name+'" class="form-control-sm" style="width: 100% !important;">';
 
         for (var level of LEVELS_STRINGS){
             html +=
@@ -175,9 +175,8 @@ function FillLevel(users){
             else {
                 var response = JSON.parse(data);
                 if (response.status === "OK"){
-                    FillDelete(response.users);
-                    FillLevel(response.users);
-                    AdmUserLog("Users correctly deleted");
+                    AdmUserInit();
+                    AdmUserLog("Users levels correctly applied");
                 }
                 else {
                     AdmUserLog(response.status);
