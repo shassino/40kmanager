@@ -13,14 +13,11 @@ $response = new Response; //init the empty object
 include('includes/requireAdmin.php');
 
 try {
-    $tables = array("members", "levels");
     foreach($post->users as $user){
-        foreach($tables as $table){
-            $queryString = 'DELETE FROM '.$table.' WHERE username="'.$user.'"';
-            $query = $db->prepare($queryString);
-            $query->execute();
-            error_log("Query: ".$queryString);
-        }
+        $queryString = 'UPDATE levels SET level="'.$user->level.'" WHERE username="'.$user->name.'"';
+        $query = $db->prepare($queryString);
+        $query->execute();
+        error_log("Query: ".$queryString);
     }
 }
 catch(PDOException $e) {

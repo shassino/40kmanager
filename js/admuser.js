@@ -164,7 +164,7 @@ function FillLevel(users){
         request.session = sessionId;
         request.users = new Array();
         form.each(function() {
-            request.users.push({"level": this.value, "name": this.name});
+            request.users.push({"level": LEVELS[this.value], "name": this.name});
         })
 
         $.post("./php/userlevel.php", JSON.stringify(request), function(data, status, xhr){
