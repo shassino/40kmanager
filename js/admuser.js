@@ -138,7 +138,7 @@ function FillLevel(users){
                 ((counter) ? '<div class="row listUser" style="background-color: #ebebeb;">' : '<div class="row listUser">')+
                     '<label for="select'+user.name+'" class="col-sm-8 col-form-label-sm" style="margin-bottom: 0px !important;">'+user.name+'</label>'+
                     '<div class="col-sm-4">'+
-                        '<select id="select'+user.name+'" class="form-control-sm">';
+                        '<select id="select'+user.name+'" name="'+user.name+'" class="form-control-sm">';
 
         for (var level of LEVELS_STRINGS){
             html +=
@@ -159,13 +159,34 @@ function FillLevel(users){
     div.html(html);
 
     $("#manageUserForm").submit(function(e){
-        form = $('#manageUserForm :input');
-        var values = {};
-        values.users = new Array();
+        form = $('#manageUserForm select:input');
+        var request = {};
+        request.session = sessionId;
+        request.users = new Array();
         form.each(function() {
-            values.users.push({"level": this.value, "name": "pippo"});
+            request.users.push({"level": this.value, "name": this.name});
         })
 
+        $.post("./php/userlevel.php", JSON.stringify(request), function(data, status, xhr){
+            if (status == "error"){
+                //handle failure
+                AdmUserLog('Unable to contact server');
+            }
+            else {
+                var response = JSON.parse(data);
+                if (response.status === "OK"){
+                    FillDelete(response.users);
+                    FillLevel(response.users);
+                    AdmUserLog("Users correctly deleted");
+                }
+                else {
+                    AdmUserLog(response.status);
+                }
+            }
+        }).fail(function(){ 
+            // Handle error here
+            AdmUserLog('Unable to complete request. 404?');
+        });
         e.preventDefault();
     });
 }
