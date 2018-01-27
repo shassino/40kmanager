@@ -15,16 +15,13 @@ $(window).on('hashchange', function() {
 function LocationSwitch(newHash) {
     switch (newHash) {
         case "#admuser":
-            if (userLevel === LEVELS.Admin){
-                LoadAdmUser();
-            }
-            else {
-                LoadHome();
-            }
+            LoadInContainerIfAdmin("#admuser", "./html/admuser.html", OnAdmUserLoad);
             break;
-
+        case "#admsettings":
+            LoadInContainerIfAdmin("#admsettings", "./html/admsettings.html", OnAdmSettingsLoad);
+            break;
         case "#hexmap":
-            LoadHexMap();
+            LoadInContainer("#hexmap", "./html/hexmap.html", InitHexMap);
             break;
 
         case "#home":
@@ -56,47 +53,30 @@ function LoadToolBar(){
     });
 }
 
-function LoadHexMap(){
-    UpdateHash("#hexmap");
-    /* First fill container html */
-    $("#container").load("./html/hexmap.html", function( response, status, xhr ) {
-        if ( status == "error" ) {
-          var msg = "Sorry but there was an error: ";
-          $( "#container" ).html( msg + xhr.status + " " + xhr.statusText );
-        }
-        else {
-            /* Run Map */
-            InitHexMap();
-        }
-    });
-}
-
 function LoadHome(){
-    UpdateHash("#home");
-    /* First fill container html */
-    $("#container").load("./html/home.html", function( response, status, xhr ) {
-        if ( status == "error" ) {
-          var msg = "Sorry but there was an error: ";
-          $( "#container" ).html( msg + xhr.status + " " + xhr.statusText );
-        }
-        else {
-            /* Run Home */
-            /* InitHome(); */
-        }
-    });
+    LoadInContainer("#home", "./html/home.html", InitHome);
 }
 
-function LoadAdmUser(){
-    UpdateHash("#admuser");
+function LoadInContainer(hash, html, OnLoad){
+    UpdateHash(hash);
     /* First fill container html */
-    $("#container").load("./html/admuser.html", function( response, status, xhr ) {
+    $("#container").load(html, function( response, status, xhr ) {
         if ( status == "error" ) {
           var msg = "Sorry but there was an error: ";
           $( "#container" ).html( msg + xhr.status + " " + xhr.statusText );
         }
         else {
             /* Then Run */
-            OnAdmUserLoad();
+            OnLoad();
         }
     });
+}
+
+function LoadInContainerIfAdmin(hash, html, OnLoad){
+    if (userLevel === LEVELS.Admin){
+        LoadInContainer(hash, html, OnLoad);
+    }
+    else {
+        LoadHome();
+    }
 }
