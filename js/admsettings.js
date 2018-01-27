@@ -1,2 +1,2 @@
-function OnAdmSettingsLoad(){
+function admsettingsOnLoad(){
 }

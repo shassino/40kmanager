@@ -10,7 +10,7 @@ var width;
 var radius;
 var height;
 
-function InitHexMap(){
+function hexmapOnLoad(){
     map = d3.select("#map").node();
     width = map.clientWidth; //window.innerWidth;
     height = width * 9 / 16;

@@ -1,3 +1,3 @@
-function InitHome(){
-    
+function homeOnLoad(){
+
 }

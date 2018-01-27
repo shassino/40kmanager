@@ -5,7 +5,7 @@ var userLevel = LEVELS.Inactive;
 
 //If this change update utils.php
 
-function OnLoadMenu() {
+function menuOnLoad() {
     LoadLoginDropdown(); //Fill login dropdown
     DisableAdmin();
 };

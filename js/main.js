@@ -15,16 +15,16 @@ $(window).on('hashchange', function() {
 function LocationSwitch(newHash) {
     switch (newHash) {
         case "#admuser":
-            LoadInContainerIfAdmin("admuser", OnAdmUserLoad);
+            LoadInContainerIfAdmin("admuser");
             break;
         case "#admsettings":
-            LoadInContainerIfAdmin("admsettings", OnAdmSettingsLoad, false);
+            LoadInContainerIfAdmin("admsettings", false);
             break;
         case "#admmatches":
-            LoadInContainerIfAdmin("admmatches", OnAdmMatchesLoad, false);
+            LoadInContainerIfAdmin("admmatches", false);
             break;
         case "#hexmap":
-            LoadInContainer("hexmap", InitHexMap);
+            LoadInContainer("hexmap");
             break;
 
         case "#home":
@@ -51,17 +51,17 @@ function LoadToolBar(){
         }
         else {
             /* Run Menu */
-            LoadCss('./style/menu.css')
-            LoadScript('./js/menu.js', OnLoadMenu);
+            LoadCss('menu');
+            LoadScript('menu');
         }
     });
 }
 
 function LoadHome(){
-    LoadInContainer("home", InitHome);
+    LoadInContainer("home");
 }
 
-function LoadInContainer(item, OnLoad, css = true){
+function LoadInContainer(item, css = true){
     UpdateHash('#'+item);
     /* First fill container html */
     $("#container").load('./html/'+item+'.html', function( response, status, xhr ) {
@@ -72,9 +72,9 @@ function LoadInContainer(item, OnLoad, css = true){
         else {
             /* Then Run */
             if (css){
-                LoadCss('./style/'+item+'.css')
+                LoadCss(item);
             }
-            LoadScript('./js/'+item+'.js', OnLoad);
+            LoadScript(item);
         }
     })
     .fail(function(){
@@ -82,24 +82,24 @@ function LoadInContainer(item, OnLoad, css = true){
     });
 }
 
-function LoadInContainerIfAdmin(item, OnLoad, css = true){
+function LoadInContainerIfAdmin(item, css = true){
     if (userLevel === LEVELS.Admin){
-        LoadInContainer(item, OnLoad, css);
+        LoadInContainer(item, css);
     }
     else {
         LoadHome();
     }
 }
 
-function LoadScript(url, OnLoad){
-    $.getScript(url, function( data, textStatus, xhr ) {
+function LoadScript(item){
+    $.getScript('./js/'+item+'.js', function( data, textStatus, xhr ) {
         if ( status == "error" ) {
             var msg = "Sorry but there was an error on js load: ";
             $( "#container" ).html( msg + xhr.status + " " + xhr.statusText );
         }
         else {
             /* Then Run */
-            OnLoad();
+            window[item+'OnLoad']();
         }
     })
     .fail(function(){
@@ -107,12 +107,12 @@ function LoadScript(url, OnLoad){
     });
 }
 
-function LoadCss(href){
+function LoadCss(item){
     $.ajax({
-        url: href,
+        url: './style/'+item+'.css',
         dataType: 'css',
         success: function(){                  
-            $('<link rel="stylesheet" type="text/css" href="'+href+'" />').appendTo("head");
+            $('<link rel="stylesheet" type="text/css" href="./style/'+item+'.css" />').appendTo("head");
         },
         error: function(){
             $( "#container" ).html("Error on css load");

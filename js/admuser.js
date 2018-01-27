@@ -1,4 +1,4 @@
-function OnAdmUserLoad(){
+function admuserOnLoad(){
     AdmUserInit();
 
     $('#createUserForm').submit(function(e){
