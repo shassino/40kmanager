@@ -12,14 +12,11 @@ var height;
 
 function calcSizes(){
     map = d3.select("#map").node();
-    width = map.clientWidth; //window.innerWidth;
+    width = map.clientWidth - 20; //window.innerWidth;
     height = width * 9 / 16;
     radius = width / (numHexX * 3 + 0.5);
     var dy = radius * 2 * Math.sin(Math.PI / 3);
     height = Math.ceil(height / dy) * dy;
-
-    d3.select("#bottom").style("height", (map.clientHeight - height) + "px");
-    d3.select("#right").style("bottom", (map.clientHeight - height) + "px");
 }
 
 function render(){
