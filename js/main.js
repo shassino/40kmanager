@@ -43,6 +43,7 @@ function UpdateHash(newHash){
 }
 
 function LoadToolBar(){
+    LoadCss('menu');
     /* First fill container html */
     $("#toolbar").load("./html/menu.html", function( response, status, xhr ) {
         if ( status == "error" ) {
@@ -51,7 +52,6 @@ function LoadToolBar(){
         }
         else {
             /* Run Menu */
-            LoadCss('menu');
             LoadScript('menu');
         }
     });
@@ -63,6 +63,9 @@ function LoadHome(){
 
 function LoadInContainer(item, css = true){
     UpdateHash('#'+item);
+    if (css){
+        LoadCss(item);
+    }
     /* First fill container html */
     $("#container").load('./html/'+item+'.html', function( response, status, xhr ) {
         if ( status == "error" ) {
@@ -71,14 +74,8 @@ function LoadInContainer(item, css = true){
         }
         else {
             /* Then Run */
-            if (css){
-                LoadCss(item);
-            }
             LoadScript(item);
         }
-    })
-    .fail(function(){
-        $( "#container" ).html("Fail on html load");
     });
 }
 
@@ -110,11 +107,11 @@ function LoadScript(item){
 function LoadCss(item){
     $.ajax({
         url: './style/'+item+'.css',
-        dataType: 'css',
+        /*dataType: 'css',*/
         success: function(){                  
             $('<link rel="stylesheet" type="text/css" href="./style/'+item+'.css" />').appendTo("head");
         },
-        error: function(){
+        error: function(xhr, status, error){
             $( "#container" ).html("Error on css load");
         }
     })
