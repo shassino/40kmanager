@@ -10,7 +10,7 @@ var width;
 var radius;
 var height;
 
-function hexmapOnLoad(){
+function calcSizes(){
     map = d3.select("#map").node();
     width = map.clientWidth; //window.innerWidth;
     height = width * 9 / 16;
@@ -20,8 +20,37 @@ function hexmapOnLoad(){
 
     d3.select("#bottom").style("height", (map.clientHeight - height) + "px");
     d3.select("#right").style("bottom", (map.clientHeight - height) + "px");
+}
+
+function render(){
+    d3.select("#svg_1")
+        .attr("width", width)
+        .attr("height", height);
+    d3.select("#rect_1")
+        .attr("width", width)
+        .attr("height", height);
+    d3.select("#img_1")
+        .attr("width", width)
+        .attr("height", height);
 
     var hexes = CalcHex(radius, width, height);
+    
+    d3.selectAll('path').remove();
+
+    svg.attr("class", "hexagon")
+        .selectAll("path")
+        .data(hexes.id)
+        .enter()
+        .append("path")
+        .attr("d", function(d) { return hexes.d[d]; })
+        .attr("class", "red")
+        .on("click", click);
+
+    svg.exit().remove();
+}
+
+function hexmapOnLoad(){
+    calcSizes();
 
     svg = d3.select("#map")
         .append("svg:svg")
@@ -40,18 +69,13 @@ function hexmapOnLoad(){
         .attr("fill", 'none');
 
     svg.append("image")
+        .attr("id","img_1")
         .attr("xlink:href", "./images/mars.jpg")
         .attr("width", width)
         .attr("height", height)
         .attr("preserveAspectRatio", "none");
-
-    svg.attr("class", "hexagon")
-        .selectAll("path")
-        .data(hexes.id)
-        .enter().append("path")
-        .attr("d", function(d) { return hexes.d[d]; })
-        .attr("class", "red")
-        .on("click", click);
+    
+    render();
 }
 
 function CalcHex(radius, width, height) {
@@ -96,18 +120,10 @@ function CalcHex(radius, width, height) {
     };
 }
 
-
 window.onresize = function(){
-    width = window.innerWidth;
-    height = width / 16 * 9;
-    radius = width / 20;
+    calcSizes();
     
-    d3.select("#svg_1")
-        .attr("width", width)
-        .attr("height", height);
-    d3.select("#rect_1")
-        .attr("width", width)
-        .attr("height", height);
+    render();
 }
 
 /**
