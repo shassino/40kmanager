@@ -15,13 +15,16 @@ $(window).on('hashchange', function() {
 function LocationSwitch(newHash) {
     switch (newHash) {
         case "#admuser":
-            LoadInContainerIfAdmin("#admuser", "./html/admuser.html", OnAdmUserLoad);
+            LoadInContainerIfAdmin("admuser", OnAdmUserLoad);
             break;
         case "#admsettings":
-            LoadInContainerIfAdmin("#admsettings", "./html/admsettings.html", OnAdmSettingsLoad);
+            LoadInContainerIfAdmin("admsettings", OnAdmSettingsLoad, false);
+            break;
+        case "#admmatches":
+            LoadInContainerIfAdmin("admmatches", OnAdmMatchesLoad, false);
             break;
         case "#hexmap":
-            LoadInContainer("#hexmap", "./html/hexmap.html", InitHexMap);
+            LoadInContainer("hexmap", InitHexMap);
             break;
 
         case "#home":
@@ -48,35 +51,74 @@ function LoadToolBar(){
         }
         else {
             /* Run Menu */
-            OnLoadMenu();
+            LoadCss('./style/menu.css')
+            LoadScript('./js/menu.js', OnLoadMenu);
         }
     });
 }
 
 function LoadHome(){
-    LoadInContainer("#home", "./html/home.html", InitHome);
+    LoadInContainer("home", InitHome);
 }
 
-function LoadInContainer(hash, html, OnLoad){
-    UpdateHash(hash);
+function LoadInContainer(item, OnLoad, css = true){
+    UpdateHash('#'+item);
     /* First fill container html */
-    $("#container").load(html, function( response, status, xhr ) {
+    $("#container").load('./html/'+item+'.html', function( response, status, xhr ) {
         if ( status == "error" ) {
-          var msg = "Sorry but there was an error: ";
+          var msg = "Sorry but there was an error on html load: ";
           $( "#container" ).html( msg + xhr.status + " " + xhr.statusText );
+        }
+        else {
+            /* Then Run */
+            if (css){
+                LoadCss('./style/'+item+'.css')
+            }
+            LoadScript('./js/'+item+'.js', OnLoad);
+        }
+    })
+    .fail(function(){
+        $( "#container" ).html("Fail on html load");
+    });
+}
+
+function LoadInContainerIfAdmin(item, OnLoad, css = true){
+    if (userLevel === LEVELS.Admin){
+        LoadInContainer(item, OnLoad, css);
+    }
+    else {
+        LoadHome();
+    }
+}
+
+function LoadScript(url, OnLoad){
+    $.getScript(url, function( data, textStatus, xhr ) {
+        if ( status == "error" ) {
+            var msg = "Sorry but there was an error on js load: ";
+            $( "#container" ).html( msg + xhr.status + " " + xhr.statusText );
         }
         else {
             /* Then Run */
             OnLoad();
         }
+    })
+    .fail(function(){
+        $( "#container" ).html("Fail on js load");
     });
 }
 
-function LoadInContainerIfAdmin(hash, html, OnLoad){
-    if (userLevel === LEVELS.Admin){
-        LoadInContainer(hash, html, OnLoad);
-    }
-    else {
-        LoadHome();
-    }
+function LoadCss(href){
+    $.ajax({
+        url: href,
+        dataType: 'css',
+        success: function(){                  
+            $('<link rel="stylesheet" type="text/css" href="'+href+'" />').appendTo("head");
+        },
+        error: function(){
+            $( "#container" ).html("Error on css load");
+        }
+    })
+    .fail(function(){
+        $( "#container" ).html("Fail on css load");
+    });
 }
