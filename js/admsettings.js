@@ -5,7 +5,7 @@ function admsettingsOnLoad(){
     var request = {};
     request.session = GetSessionId();
     request.operation = "add";
-    request.name = $("#inputRound").text();
+    request.name = $("#inputRound").val();
     RequestData("./php/champrounds.php", request, function(response){
       admsettingsInit();
     });
@@ -30,8 +30,9 @@ function admsettingsOnLoad(){
   $("#setTitleButton").click(function(){
     var request = {};
     request.session = GetSessionId();
-    request.name = $("#inputRound").text();
-    RequestData("./php/champrounds.php", request, function(response){
+    input = $("#inputChamp");
+    request.name = input.val();
+    RequestData("./php/champadd.php", request, function(response){
       admsettingsInit();
     });
   });
@@ -42,11 +43,11 @@ function admsettingsInit(){
   request.session = GetSessionId();
   
   RequestData("./php/champdata.php", request, function(response){
-    $("#inputTitle").text(request.name);
-    $("#champRulesText").text(request.rules);
+    $("#inputChamp").val(response.name);
+    $("#champRulesText").val(response.rules);
 
     html = "";
-    for (var round of request.rounds){
+    for (var round of response.rounds){
       html += '<option>'+round+'</option>';
     } 
     $("#roundSelector").html(html);
