@@ -1,13 +1,5 @@
 <?php
-if (!isset($post->session)){
-    $response->status = "Error: session missing";
-    SendJson($response);
-}
-
-if ($post->session == ""){
-    $response->status = "Error: session missing";
-    SendJson($response);
-}
+include('includes/requireSession.php');
 
 if ($user->getUserLevel($post->session) != Levels::Admin){
     $response->status = "Error: User level is not Admin";

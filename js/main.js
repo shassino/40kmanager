@@ -1,3 +1,9 @@
+//If this change update utils.php
+var LEVELS = Object.freeze({"Inactive":-1, "Admin":0, "User":1});
+var LEVELS_STRINGS = ["Inactive", "Admin", "User"];
+var sessionId = "";
+var userLevel = LEVELS.Inactive;
+
 var hash = "#"; /* current hash of the page */
 
 $(function(){

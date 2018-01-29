@@ -1,10 +1,3 @@
-var LEVELS = Object.freeze({"Inactive":-1, "Admin":0, "User":1});
-var LEVELS_STRINGS = ["Inactive", "Admin", "User"];
-var sessionId = "";
-var userLevel = LEVELS.Inactive;
-
-//If this change update utils.php
-
 function menuOnLoad() {
     LoadLoginDropdown(); //Fill login dropdown
     DisableAdmin();

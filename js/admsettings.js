@@ -1,4 +1,5 @@
 function admsettingsOnLoad(){
+    tinymce.remove();
     tinymce.init({
         selector: '#champRulesText',
         height: 500,
@@ -14,3 +15,5 @@ function admsettingsOnLoad(){
           '//www.tinymce.com/css/codepen.min.css']
       });
 }
+
+//# sourceURL=./js/admsettings.js

@@ -4,6 +4,31 @@
             <div class="card border-dark">
                 <div class="card-header bg-dark text-light my-header">Championship Settings</div>
                 <div class="card-body text-dark" id="champSettingsDiv">
+                    <form>
+                        <div class="form-group row">
+                            <label for="inputTitle" class="col-sm-3 col-form-label">Title</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputTitle" placeholder="Championship title">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputRound" class="col-sm-3 col-form-label">Rounds</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="inputRound" placeholder="Round title">
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="button" id="addRoundButton" class="btn btn-dark" style="width: 100%;" >Add</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <select multiple class="form-control" id="roundSelector">
+                                <option>jkfhejfh</option>
+                                <option>jkfhejfh</option>
+                                <option>jkfhejfh</option>
+                            </select>
+                        </div>
+                        <button type="button" id="addRoundButton" class="btn btn-dark">Delete</button>
+                    </form>
                     <!-- filled by js -->
                 </div> 
             </div>
@@ -23,7 +48,10 @@
                 <div class="card-header bg-dark text-light my-header">Championship Rules</div>
                 <div class="card-body text-dark">
                     <textarea class="form-control" id="champRulesText"></textarea>
-                </div> 
+                </div>
+                <div class="card-footer">
+                    <button type="button" id="applyRulesButton" class="btn btn-dark">Apply</button>
+                </div>
             </div>
         </div>
     </div>
