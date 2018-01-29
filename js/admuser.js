@@ -11,21 +11,9 @@ function admuserOnLoad(){
         })
         values.session = GetSessionId();
 
-        $.post("./php/register.php", JSON.stringify(values), function(data, status, xhr){
-            if (status == "error"){
-                //handle failure
-                AdmUserLog('Unable to contact server');
-            }
-            else {
-                var response = JSON.parse(data);
-                if (response.status === "OK"){
-                    AdmUserLog('User: ' + values['username'] + ' correctly created');
-                    AdmUserInit();
-                }
-                else {
-                    AdmUserLog(response.status);
-                }
-            }
+        RequestData("./php/register.php", values, function(response){
+            AppendLog('User: ' + values['username'] + ' correctly created');
+            AdmUserInit();
         });
 
         e.preventDefault();
@@ -37,27 +25,10 @@ function AdmUserInit(){
     var request = {};
     request.session = GetSessionId();
     
-    $.post("./php/userlist.php", JSON.stringify(request), function(data, status, xhr){
-        if (status == "error"){
-            //handle failure
-            AdmUserLog('Unable to contact server');
-        }
-        else {
-            var response = JSON.parse(data);
-            if (response.status === "OK"){
-                FillDelete(response.users);
-                FillLevel(response.users);
-            }
-            else {
-                AdmUserLog(response.status);
-            }
-        }
+    RequestData("./php/userlist.php", request, function(response){
+        FillDelete(response.users);
+        FillLevel(response.users);
     });
-}
-
-function AdmUserLog(text){
-    //TODO save on db
-    $("#logDiv").append('<p>' + text + '</p>');
 }
 
 function FillDelete(users){
@@ -102,24 +73,9 @@ function FillDelete(users){
             '<button type="button" class="btn btn-primary" id="modalConfirm" data-dismiss="modal">Apply</button>'
         );
         $('#modalConfirm').click(function(){
-            $.post("./php/userdelete.php", JSON.stringify(values), function(data, status, xhr){
-                if (status == "error"){
-                    //handle failure
-                    AdmUserLog('Unable to contact server');
-                }
-                else {
-                    var response = JSON.parse(data);
-                    if (response.status === "OK"){
-                        AdmUserLog("Users correctly deleted");
-                        AdmUserInit();
-                    }
-                    else {
-                        AdmUserLog(response.status);
-                    }
-                }
-            }).fail(function(){ 
-                // Handle error here
-                AdmUserLog('Unable to complete request. 404?');
+            RequestData("./php/userdelete.php", values, function(response){
+                AppendLog("Users correctly deleted");
+                AdmUserInit();
             });
         });
         $('#myModal').modal('show');
@@ -165,27 +121,13 @@ function FillLevel(users){
         request.users = new Array();
         form.each(function() {
             request.users.push({"level": LEVELS[this.value], "name": this.name});
-        })
-
-        $.post("./php/userlevel.php", JSON.stringify(request), function(data, status, xhr){
-            if (status == "error"){
-                //handle failure
-                AdmUserLog('Unable to contact server');
-            }
-            else {
-                var response = JSON.parse(data);
-                if (response.status === "OK"){
-                    AdmUserInit();
-                    AdmUserLog("Users levels correctly applied");
-                }
-                else {
-                    AdmUserLog(response.status);
-                }
-            }
-        }).fail(function(){ 
-            // Handle error here
-            AdmUserLog('Unable to complete request. 404?');
         });
+
+        RequestData("./php/userlevel.php", request, function(response){
+            AdmUserInit();
+            AppendLog("Users levels correctly applied");
+        });
+        
         e.preventDefault();
     });
 }

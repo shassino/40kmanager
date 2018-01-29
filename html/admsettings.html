@@ -7,8 +7,11 @@
                     <form>
                         <div class="form-group row">
                             <label for="inputTitle" class="col-sm-3 col-form-label">Title</label>
-                            <div class="col-sm-9">
+                            <div class="col-sm-6">
                                 <input type="text" class="form-control" id="inputTitle" placeholder="Championship title">
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="button" id="setTitleButton" class="btn btn-dark" style="width: 100%;" >Add</button>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -27,7 +30,7 @@
                                 <option>jkfhejfh</option>
                             </select>
                         </div>
-                        <button type="button" id="addRoundButton" class="btn btn-dark">Delete</button>
+                        <button type="button" id="delRoundButton" class="btn btn-dark">Delete</button>
                     </form>
                     <!-- filled by js -->
                 </div> 
@@ -35,8 +38,8 @@
         </div>
         <div class="col-md-6" style="padding: 10px">
             <div class="card border-dark">
-                <div class="card-header bg-dark text-light my-header">Championship Players</div>
-                <div class="card-body text-dark" id="champPlayersDiv">
+                <div class="card-header bg-dark text-light my-header">Log</div>
+                <div class="card-body text-dark" id="champLogDiv">
                     <!-- filled by js -->
                 </div> 
             </div>

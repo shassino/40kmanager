@@ -125,3 +125,30 @@ function LoadCss(item){
         $( "#container" ).html("Fail on css load");
     });
 }
+
+function RequestData(url, request, OnLoad){
+    $.post(url, JSON.stringify(request), function(data, status, xhr){
+        if (status == "error"){
+            //handle failure
+            AppendLog('Unable to contact server');
+        }
+        else {
+            var response = JSON.parse(data);
+            if (response.status === "OK"){
+                if (OnLoad != null){
+                    OnLoad(response);
+                }
+            }
+            else {
+                AppendLog(response.status);
+            }
+        }
+    }).fail(function(){ 
+        // Handle error here
+        AppendLog('Unable to complete request. 404?');
+    });
+}
+
+function AppendLog(log){
+    $("#logDiv").append("<p>"+log+"</p>");
+  }
