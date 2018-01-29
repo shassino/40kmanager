@@ -23,7 +23,7 @@ try {
         }
     }
     else if ($post->operation == "add"){
-        $queryString = 'INSERT into rounds (name) VALUES("'.$post->name.'")';
+        $queryString = 'INSERT into rounds (name,championship) VALUES("'.$post->name.'","'.$post->championship.'")';
         error_log("Query: ".$queryString);
         $query = $db->prepare($queryString);
         $query->execute();

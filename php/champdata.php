@@ -36,12 +36,11 @@ try {
     $query->execute();
 
     while ($row = $query->fetch()) {
-        array_push($response->rounds, $row);
+        array_push($response->rounds, $row['name']);
     }
 }
 catch(PDOException $e) {
     $response->status = 'ERROR: '.$e->getMessage();
 }
-
 SendJson($response);
 ?>
