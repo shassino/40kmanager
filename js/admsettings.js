@@ -31,6 +31,7 @@ function admsettingsOnLoad(){
     request.name = $("#inputRound").val();
     request.championship = championship;
     RequestData("./php/champrounds.php", request, function(response){
+      AppendLog('Round '+ request.name + ' correctly added to championship '+request.championship);
       admsettingsInit();
     });
   });
@@ -47,6 +48,7 @@ function admsettingsOnLoad(){
     });
 
     RequestData("./php/champrounds.php", request, function(response){
+      AppendLog('Round '+ request.name + ' correctly removed from championship '+request.championship);
       admsettingsInit();
     });
   });
@@ -57,6 +59,7 @@ function admsettingsOnLoad(){
     input = $("#inputChamp");
     request.name = input.val();
     RequestData("./php/champadd.php", request, function(response){
+      AppendLog('Championship '+request.championship+' added and set as active');
       admsettingsInit();
     });
   });
@@ -66,6 +69,7 @@ function admsettingsOnLoad(){
     request.session = GetSessionId();
     request.rules = tinymce.activeEditor.getContent();
     RequestData("./php/champrules.php", request, function(response){
+      AppendLog('Championship rules updated');
       admsettingsInit();
     });
   });
