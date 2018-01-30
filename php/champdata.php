@@ -31,7 +31,7 @@ try {
     $response->rules = $result['rules'];
 
     /* get the rounds of the above championship */
-    $queryString = 'SELECT name FROM rounds WHERE championship="'.$response->name.'"';
+    $queryString = 'SELECT name FROM rounds WHERE championship="'.$response->name.'" ORDER BY name';
     error_log("Query: ".$queryString);
     $query = $db->prepare($queryString);
     $query->execute();
@@ -41,7 +41,7 @@ try {
     }
 
     /* get the days of the above championship */
-    $queryString = 'SELECT name FROM days WHERE championship="'.$response->name.'"';
+    $queryString = 'SELECT name FROM days WHERE championship="'.$response->name.'" ORDER BY name';
     error_log("Query: ".$queryString);
     $query = $db->prepare($queryString);
     $query->execute();
