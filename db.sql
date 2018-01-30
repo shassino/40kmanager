@@ -39,6 +39,13 @@ CREATE TABLE `rounds` (
   PRIMARY KEY (`roundID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
+CREATE TABLE `days` (
+  `dayID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `championship` varchar(255) NOT NULL,
+  PRIMARY KEY (`dayID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
 CREATE TABLE `matches` (
   `matchID` int(11) NOT NULL AUTO_INCREMENT,
   `p1` varchar(255) NOT NULL,

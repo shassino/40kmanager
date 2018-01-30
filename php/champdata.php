@@ -9,6 +9,7 @@ class Response {
     public $name;
     public $rules;
     public $rounds = array();
+    public $days = array();
 }
 
 $response = new Response; //init the empty object
@@ -37,6 +38,16 @@ try {
 
     while ($row = $query->fetch()) {
         array_push($response->rounds, $row['name']);
+    }
+
+    /* get the days of the above championship */
+    $queryString = 'SELECT name FROM days WHERE championship="'.$response->name.'"';
+    error_log("Query: ".$queryString);
+    $query = $db->prepare($queryString);
+    $query->execute();
+
+    while ($row = $query->fetch()) {
+        array_push($response->days, $row['name']);
     }
 }
 catch(PDOException $e) {
