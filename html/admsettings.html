@@ -1,9 +1,9 @@
 <div class="container" style="padding: 20px;">
     <div class="row">
-        <div class="col-md-6" style="padding: 10px">
+        <div class="col-md-12" style="padding: 10px">
             <div class="card border-dark">
                 <div class="card-header bg-dark text-light my-header">Championship Settings</div>
-                <div class="card-body text-dark" id="champSettingsDiv">
+                <div class="card-body text-dark">
                     <div class="form-group row">
                         <label for="currentChamp" class="col-sm-3 col-form-label" >Current</label>
                         <div class="col-sm-9">
@@ -19,6 +19,15 @@
                             <button type="button" id="setTitleButton" class="btn btn-dark" style="width: 100%;" >Add</button>
                         </div>
                     </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" style="padding: 10px">
+            <div class="card border-dark">
+                <div class="card-header bg-dark text-light my-header">Rounds Settings</div>
+                <div class="card-body text-dark" id="champSettingsDiv">
                     <div class="form-group row">
                         <label for="inputRound" class="col-sm-3 col-form-label">Rounds</label>
                         <div class="col-sm-6">
@@ -41,9 +50,25 @@
         </div>
         <div class="col-md-6" style="padding: 10px">
             <div class="card border-dark">
-                <div class="card-header bg-dark text-light my-header">Log</div>
-                <div class="card-body text-dark" id="logDiv">
-                    <!-- filled by js -->
+                <div class="card-header bg-dark text-light my-header">Championship Days</div>
+                <div class="card-body text-dark" id="daySettingsDiv">
+                    <div class="form-group row">
+                        <label for="inputDay" class="col-sm-3 col-form-label">Days</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="inputDay" placeholder="Day title">
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="button" id="addRoundButton" class="btn btn-dark" style="width: 100%;" >Add</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <select multiple class="form-control" id="daySelector">
+                            <option>jkfhejfh</option>
+                            <option>jkfhejfh</option>
+                            <option>jkfhejfh</option>
+                        </select>
+                    </div>
+                    <button type="button" id="delDayButton" class="btn btn-dark">Delete</button>
                 </div> 
             </div>
         </div>
@@ -58,6 +83,16 @@
                 <div class="card-footer">
                     <button type="button" id="applyRulesButton" class="btn btn-dark">Apply</button>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="padding: 10px">
+            <div class="card border-dark">
+                <div class="card-header bg-dark text-light my-header">Log</div>
+                <div class="card-body text-dark" id="logDiv">
+                    <!-- filled by js -->
+                </div> 
             </div>
         </div>
     </div>
