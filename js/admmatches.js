@@ -48,18 +48,18 @@ function FillMatches(){
     request.operation = "list";
     var toggle = 0;
     RequestData("./php/matches.php", request, function(response){
-        html = '<table style="border: none; width: 100%; padding: 5px !important;">'+
+        var html = '<table class="table">'+
         '<tr class="title">'+
-            '<td>Round</td>'+
-            '<td>Host</td>'+
-            '<td>Guest</td>'+
-            '<td>View match</td>'+
-            '<td>Delete match</td>'+
+            '<td style="padding: 5px;">Round</td>'+
+            '<td style="padding: 5px;">Host</td>'+
+            '<td style="padding: 5px;">Guest</td>'+
+            '<td style="padding: 5px;">View match</td>'+
+            '<td style="padding: 5px;">Delete match</td>'+
         '</tr>';
         for (var match of response.matches){
             toggle = !toggle;
             html += 
-            (toggle) ? '<tr>' : '<tr style="background-color: #ebebeb;">'+
+            ((toggle) ? '<tr>' : '<tr style="background-color: #ebebeb;">')+
                 '<td>'+
                     '<a href="#round-'+match.round+'" class="card-link">'+match.round+'</a>'+
                 '</td>'+
@@ -72,7 +72,7 @@ function FillMatches(){
                 '<td>'+
                     '<a href="#match-'+match.matchId+'" class="card-link">view</a>'+
                 '</td>'+
-                '<td style:"text-align: center !important;">'+
+                '<td style="padding: 5px;">'+
                     '<button type="button" id="delmatch'+match.matchId+'" class="btn btn-dark">Delete</button>'+
                 '</td>'+
             '</tr>';
