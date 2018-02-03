@@ -6,3 +6,8 @@
 .hidden {
     display: none;
 }
+
+.title {
+    font-weight: bold;
+    background-color: #b8b8b8;
+}
