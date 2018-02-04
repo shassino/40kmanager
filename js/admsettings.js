@@ -30,7 +30,7 @@ function admsettingsOnLoad(){
     request.operation = "add";
     request.name = $("#inputDay").val();
     request.championship = championship;
-    RequestData("./php/champdays.php", request, function(response){
+    RequestData("./php/days.php", request, function(response){
       AppendLog('Day '+ request.name + ' correctly added to championship '+request.championship);
       admsettingsInit();
     });
@@ -47,7 +47,7 @@ function admsettingsOnLoad(){
       request.days.push(this.value);
     });
 
-    RequestData("./php/champdays.php", request, function(response){
+    RequestData("./php/days.php", request, function(response){
       AppendLog('Days '+ request.name + ' correctly removed from championship '+request.championship);
       admsettingsInit();
     });

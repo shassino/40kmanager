@@ -57,12 +57,16 @@ try{
             /* get the requester match of the championship */
             $queryString = 'SELECT p1,p2,day,matchId,obj1,obj2,lost1,lost2,report,played FROM matches WHERE matchId="'.$post->matchId.'" ORDER BY day';
             break;
+        default:
+            $response->status = "Error: wrong operation or no operation selected";
+            SendJson($response);
+            break;
     }
     error_log("Query: ".$queryString);
     $query = $db->prepare($queryString);
     $query->execute();
 
-    while ($row = $query->fetch()) {
+    while ($row = $query->fetch()){
         $match = new Match;
         $match->p1 = $row['p1'];
         $match->p2 = $row['p2'];
