@@ -157,3 +157,7 @@ function RequestData(url, request, OnLoad){
 function AppendLog(log){
     $("#logDiv").append("<p>"+log+"</p>");
 }
+
+function GetSessionId(){
+    return sessionId;
+}

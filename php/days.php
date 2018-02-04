@@ -33,7 +33,7 @@ try {
         break;
     case "get":
         include('includes/requireSession.php');
-        $queryString = 'SELECT name,championship FROM days WHERE name="'.$post->name;
+        $queryString = 'SELECT name,championship FROM days WHERE name="'.$post->name.'"';
         error_log("Query: ".$queryString);
         $query = $db->prepare($queryString);
         $query->execute();
@@ -45,6 +45,7 @@ try {
         $response->status = "Error: wrong operation or no operation selected";
         SendJson($response);
         break;
+    }
 }
 catch(PDOException $e) {
     $response->status = 'ERROR: '.$e->getMessage();

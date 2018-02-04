@@ -104,10 +104,6 @@ function LoadLogoutFailedDropdown(error){
         );
 }
 
-function GetSessionId(){
-    return sessionId;
-}
-
 function EnableAdmin(){
     $("#adminMenuItem").removeClass("hidden");
 }
