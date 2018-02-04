@@ -12,7 +12,13 @@ class Response {
 class Match {
     public $p1;
     public $p2;
-    public $round;
+    public $day;
+    public $obj1;
+    public $obj2;
+    public $lost1;
+    public $lost2;
+    public $report;
+    public $played;
     public $matchId;
 }
 
@@ -26,31 +32,49 @@ try{
             error_log("Query: ".$queryString);
             $query = $db->prepare($queryString);
             $query->execute();
-            break;
+            SendJson($response);
+            return;
         case "add":
             include('includes/requireAdmin.php');
             $queryString = 'INSERT into matches (p1,p2,day,played) VALUES("'.$post->p1.'","'.$post->p2.'","'.$post->day.'",0)';
             error_log("Query: ".$queryString);
             $query = $db->prepare($queryString);
             $query->execute();
-            break;
+            SendJson($response);
+            return;
         case "list":
             include('includes/requireSession.php');
             /* get the matches of the championship */
-            $queryString = 'SELECT p1,p2,day,matchId FROM matches ORDER BY day';
-            error_log("Query: ".$queryString);
-            $query = $db->prepare($queryString);
-            $query->execute();
-
-            while ($row = $query->fetch()) {
-                $match = new Match;
-                $match->p1 = $row['p1'];
-                $match->p2 = $row['p2'];
-                $match->day = $row['day'];
-                $match->matchId = $row['matchId'];
-                array_push($response->matches, $match);
-            }
+            $queryString = 'SELECT p1,p2,day,matchId,obj1,obj2,lost1,lost2,report,played FROM matches ORDER BY day';
             break;
+        case "player":
+            include('includes/requireSession.php');
+            /* get the requester match of the championship */
+            $queryString = 'SELECT p1,p2,day,matchId,obj1,obj2,lost1,lost2,report,played FROM matches WHERE p1="'.$post->player.'" OR p2="'.$post->player.'" ORDER BY day';
+            break;
+        case "single":
+            include('includes/requireSession.php');
+            /* get the requester match of the championship */
+            $queryString = 'SELECT p1,p2,day,matchId,obj1,obj2,lost1,lost2,report,played FROM matches WHERE matchId="'.$post->matchId.'" ORDER BY day';
+            break;
+    }
+    error_log("Query: ".$queryString);
+    $query = $db->prepare($queryString);
+    $query->execute();
+
+    while ($row = $query->fetch()) {
+        $match = new Match;
+        $match->p1 = $row['p1'];
+        $match->p2 = $row['p2'];
+        $match->day = $row['day'];
+        $match->obj1 = $row['obj1'];
+        $match->obj2 = $row['obj2'];
+        $match->lost1 = $row['lost1'];
+        $match->lost2 = $row['lost2'];
+        $match->report = $row['report'];
+        $match->played = $row['played'];
+        $match->matchId = $row['matchId'];
+        array_push($response->matches, $match);
     }
 }
 catch(PDOException $e) {

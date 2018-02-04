@@ -19,24 +19,29 @@ $(window).on('hashchange', function() {
 });
 
 function LocationSwitch(newHash) {
-    switch (newHash) {
-        case "#admuser":
-            LoadInContainerIfAdmin("admuser");
+    //split hash
+    let tokens = newHash.split('-');
+    let operation = tokens[0].replace("#", "");
+
+    switch (operation) {
+        //with admin and css
+        case "admuser":
+            LoadInContainerIfAdmin(operation);
             break;
-        case "#admsettings":
-            LoadInContainerIfAdmin("admsettings", false);
+        //with admin and no css
+        case "admsettings":
+        case "admmatches":
+            LoadInContainerIfAdmin(operation, false);
             break;
-        case "#admmatches":
-            LoadInContainerIfAdmin("admmatches", false);
-            break;
-        case "#hexmap":
+        //everyone with no css and no params
+        case "hexmap":
             LoadInContainer("hexmap");
             break;
-
-        case "#home":
-            LoadHome();
+        //everyone with no css and params
+        case "match":
+        case "user":
+            LoadInContainer(operation, false, tokens[1]);
             break;
-
         default:
             LoadHome();
             break;
@@ -67,7 +72,7 @@ function LoadHome(){
     LoadInContainer("home");
 }
 
-function LoadInContainer(item, css = true){
+function LoadInContainer(item, css = true, param = null){
     UpdateHash('#'+item);
     if (css){
         LoadCss(item);
@@ -80,21 +85,21 @@ function LoadInContainer(item, css = true){
         }
         else {
             /* Then Run */
-            LoadScript(item);
+            LoadScript(item, param);
         }
     });
 }
 
-function LoadInContainerIfAdmin(item, css = true){
+function LoadInContainerIfAdmin(item, css = true, param = null){
     if (userLevel === LEVELS.Admin){
-        LoadInContainer(item, css);
+        LoadInContainer(item, css, param);
     }
     else {
         LoadHome();
     }
 }
 
-function LoadScript(item){
+function LoadScript(item, param){
     $.getScript('./js/'+item+'.js', function( data, textStatus, xhr ) {
         if ( status == "error" ) {
             var msg = "Sorry but there was an error on js load: ";
@@ -102,7 +107,7 @@ function LoadScript(item){
         }
         else {
             /* Then Run */
-            window[item+'OnLoad']();
+            window[item+'OnLoad'](param);
         }
     })
     .fail(function(){
