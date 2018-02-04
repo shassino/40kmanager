@@ -22,17 +22,14 @@ try{
     switch ($post->operation) {
         case "delete":
             include('includes/requireAdmin.php');
-            /* get the active championship name and rules */
-            foreach($post->matches as $match){
-                $queryString = 'DELETE from matches WHERE matchID="'.$match.'"';
-                error_log("Query: ".$queryString);
-                $query = $db->prepare($queryString);
-                $query->execute();
-            }
+            $queryString = 'DELETE from matches WHERE matchID="'.$post->matchId.'"';
+            error_log("Query: ".$queryString);
+            $query = $db->prepare($queryString);
+            $query->execute();
             break;
         case "add":
             include('includes/requireAdmin.php');
-            $queryString = 'INSERT into matches (p1,p2,round,played) VALUES("'.$post->p1.'","'.$post->p2.'","'.$post->round.'",0)';
+            $queryString = 'INSERT into matches (p1,p2,day,played) VALUES("'.$post->p1.'","'.$post->p2.'","'.$post->day.'",0)';
             error_log("Query: ".$queryString);
             $query = $db->prepare($queryString);
             $query->execute();
@@ -40,7 +37,7 @@ try{
         case "list":
             include('includes/requireSession.php');
             /* get the matches of the championship */
-            $queryString = 'SELECT p1,p2,round,matchId FROM matches ORDER BY round';
+            $queryString = 'SELECT p1,p2,day,matchId FROM matches ORDER BY day';
             error_log("Query: ".$queryString);
             $query = $db->prepare($queryString);
             $query->execute();
@@ -49,7 +46,7 @@ try{
                 $match = new Match;
                 $match->p1 = $row['p1'];
                 $match->p2 = $row['p2'];
-                $match->round = $row['round'];
+                $match->day = $row['day'];
                 $match->matchId = $row['matchId'];
                 array_push($response->matches, $match);
             }

@@ -14,10 +14,10 @@ function admmatchesOnLoad(){
 
     RequestData("./php/champdata.php", request, function(response){
         html = "";
-        for (var round of response.rounds){
-          html += '<option>'+round+'</option>';
+        for (var day of response.days){
+          html += '<option>'+day+'</option>';
         } 
-        $("#roundSelector").html(html);
+        $("#daySelector").html(html);
     });
 
     FillMatches();
@@ -26,7 +26,7 @@ function admmatchesOnLoad(){
         var request = {};
         request.operation = "add";
         request.session = GetSessionId();
-        request.round = $("#roundSelector").val();
+        request.day = $("#daySelector").val();
         request.p1 = $("#inputHost").val();
         request.p2 = $("#inputGuest").val();
 
@@ -36,7 +36,7 @@ function admmatchesOnLoad(){
         }
 
         RequestData("./php/matches.php", request, function(response){
-            AppendLog('Match '+request.p1+' Vs '+request.p2+' added in round '+request.round);
+            AppendLog('Match '+request.p1+' Vs '+request.p2+' added in day '+request.day);
             FillMatches();
         });
     });
@@ -50,7 +50,7 @@ function FillMatches(){
     RequestData("./php/matches.php", request, function(response){
         var html = '<table class="table">'+
         '<tr class="title">'+
-            '<td style="padding: 5px;">Round</td>'+
+            '<td style="padding: 5px;">Day</td>'+
             '<td style="padding: 5px;">Host</td>'+
             '<td style="padding: 5px;">Guest</td>'+
             '<td style="padding: 5px;">View match</td>'+
@@ -61,7 +61,7 @@ function FillMatches(){
             html += 
             ((toggle) ? '<tr>' : '<tr style="background-color: #ebebeb;">')+
                 '<td>'+
-                    '<a href="#round-'+match.round+'" class="card-link">'+match.round+'</a>'+
+                    '<a href="#round-'+match.day+'" class="card-link">'+match.day+'</a>'+
                 '</td>'+
                 '<td>'+
                     '<a href="#user-'+match.p1+'" class="card-link">'+match.p1+'</a>'+
@@ -79,6 +79,19 @@ function FillMatches(){
         }
         html += '</table>'
         $("#champSettingsDiv").html(html);
+
+        for (var match of response.matches){
+            $('#delmatch'+match.matchId).click(function() {
+                var request = {};
+                request.operation = "delete";
+                request.session = GetSessionId();
+                request.matchId = this.id.substring(8); //remove delmatch from id
+                RequestData("./php/matches.php", request, function(response){
+                    AppendLog('Match correctly deleted');
+                    FillMatches();
+                });
+            });
+        }
     });
 }
 //# sourceURL=./js/admmatches.js
