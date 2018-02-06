@@ -58,17 +58,14 @@ try{
             $query->execute();
             SendJson($response);
         case "list":
-            include('includes/requireSession.php');
             /* get the matches of the championship */
             $queryString = 'SELECT p1,p2,day,matchId,obj1,obj2,lost1,lost2,report,played FROM matches ORDER BY day';
             break;
         case "player":
-            include('includes/requireSession.php');
             /* get the requester match of the championship */
             $queryString = 'SELECT p1,p2,day,matchId,obj1,obj2,lost1,lost2,report,played FROM matches WHERE p1="'.$post->player.'" OR p2="'.$post->player.'" ORDER BY day';
             break;
         case "single":
-            include('includes/requireSession.php');
             /* get the requester match of the championship */
             $queryString = 'SELECT p1,p2,day,matchId,obj1,obj2,lost1,lost2,report,played FROM matches WHERE matchId="'.$post->matchId.'" ORDER BY day';
             break;

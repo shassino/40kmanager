@@ -32,7 +32,6 @@ try {
         $query->execute();
         break;
     case "get":
-        include('includes/requireSession.php');
         $queryString = 'SELECT name,championship FROM days WHERE name="'.$post->name.'"';
         error_log("Query: ".$queryString);
         $query = $db->prepare($queryString);
