@@ -65,8 +65,20 @@ function FillMatch(){
 
         RequestData("./php/days.php", request, function(response2){
             let html = 
-            '<p><b>Championship: </b>'+response2.championship+'</p>'+
-            '<p><b>Day: </b>'+response2.day+'</p>';
+            '<table style="margin-bottom: 10px;">'+
+                '<tr>'+
+                    '<td class="cell"><b>Championship: </b></td>'+
+                    '<td class="cell">'+response2.championship+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                    '<td class="cell"><b>Day: </b></td>'+
+                    '<td class="cell">'+response2.day+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                    '<td class="cell"><b>Played: </b></td>'+
+                    '<td class="cell">'+match.played+'</td>'+
+                '</tr>'+
+            '</table>';
             html +=
             '<table class="table">'+
                 '<tr class="title">'+

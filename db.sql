@@ -56,7 +56,7 @@ CREATE TABLE `matches` (
   `lost1` int(16) NOT NULL,
   `lost2` int(16) NOT NULL,
   `report` longtext NOT NULL,
-  `played` bool NOT NULL,
+  `played` datetime NOT NULL,
   PRIMARY KEY (`matchID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 

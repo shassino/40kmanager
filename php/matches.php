@@ -44,7 +44,7 @@ try{
             return;
         case "result":
             include('includes/requireAdmin.php');
-            $queryString = 'UPDATE matches SET played=1, obj1='.$post->obj1.', obj2='.$post->obj2.', lost1='.$post->lost1.', lost2='.$post->lost2.' WHERE matchId="'.$post->matchId.'"';
+            $queryString = 'UPDATE matches SET played=NOW(), obj1='.$post->obj1.', obj2='.$post->obj2.', lost1='.$post->lost1.', lost2='.$post->lost2.' WHERE matchId="'.$post->matchId.'"';
             error_log("Query: ".$queryString);
             $query = $db->prepare($queryString);
             $query->execute();
