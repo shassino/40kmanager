@@ -1,3 +1,4 @@
+var rounds;
 function admroundsOnLoad(){
     var request = {};
     request.session = GetSessionId();
@@ -13,6 +14,32 @@ function admroundsOnLoad(){
         request.championship = response.name;
         RequestData("./php/rounds.php", request, function(response){
             FillRoundsSelector(response.rounds);
+            rounds = response.rounds;
+            FillUserListDiv();
+        });
+    });
+
+
+    $('#addUsersButton').click(function(){
+        var request = {};
+        request.session = GetSessionId();
+        request.operation = "adduser";
+        request.users = new Array();
+        request.rounds = new Array();
+
+        form = $('#userSelector option:selected');
+        form.each(function() {
+            request.users.push(this.value);
+        });
+
+        form = $('#roundSelector option:selected');
+        form.each(function() {
+            request.rounds.push(this.value);
+        });
+
+        RequestData("./php/rounds.php", request, function(response){
+            AppendLog("Users added correctly");
+            FillUserListDiv();
         });
     });
 }
@@ -49,5 +76,29 @@ function FillRoundsSelector(rounds){
         '</div>';
     
     $("#selectRoundsDiv").html(html);
+}
+
+function FillUserListDiv(){
+    var request = {};
+    request.session = GetSessionId();
+    request.operation = "listusers";
+    for (let round of rounds){
+        request.round = round;
+        RequestData("./php/rounds.php", request, function(response){
+            let round = response.rounds[0];
+            var html = 
+                '<div class="form-group">'+
+                    '<label for="round'+round+'Selector" class="form-label-sm">'+round+'</label>'+
+                    '<select multiple class="form-control" id="round'+round+'Selector" style="overflow-y: auto !important; height: ' + (14 + 22 * rounds.length) + 'px;">';
+            
+            for (var user of response.users){
+                html += '<option>'+user+'</option>';
+            }
+            html +=
+                    '</select>'+
+                '</div>';
+            $('#userPerRoundsDiv').append(html);
+        });
+    }
 }
 //# sourceURL=./js/admrounds.js

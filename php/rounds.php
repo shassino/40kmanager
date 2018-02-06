@@ -50,20 +50,25 @@ try {
 
     case "adduser":
         include('includes/requireAdmin.php');
-        $queryString = 'INSERT into userInRounds (user,round) VALUES("'.$post->user.'","'.$post->round.'")';
-        error_log("Query: ".$queryString);
-        $query = $db->prepare($queryString);
-        $query->execute();
+        foreach($post->rounds as $round){
+            foreach($post->users as $user){
+                $queryString = 'INSERT into userInRounds (user,round) VALUES("'.$user.'","'.$round.'")';
+                error_log("Query: ".$queryString);
+                $query = $db->prepare($queryString);
+                $query->execute();
+            }
+        }
         break;
 
     case "listusers":
-        $queryString = 'SELECT user from userInRounds WHERE round="'.$post->round.' ORDER BY user")';
+        $queryString = 'SELECT user from userInRounds WHERE round="'.$post->round.'" ORDER BY user';
         error_log("Query: ".$queryString);
         $query = $db->prepare($queryString);
         $query->execute();
         while ($row = $query->fetch()){
             array_push($response->users, $row['user']);
         }
+        array_push($response->rounds, $post->round);
         break;
     }
 }

@@ -16,7 +16,7 @@ try {
     default:
         $response->status = "Error: wrong operation or no operation selected";
         break;
-        
+
     case "listWithLev":
         include('includes/requireAdmin.php');
         $query = $db->prepare('SELECT username,level FROM levels ORDER BY username');
@@ -44,6 +44,15 @@ try {
             }
         }
         break;
+
+    case "setlevel":
+        include('includes/requireAdmin.php');
+        foreach($post->users as $user){
+            $queryString = 'UPDATE levels SET level="'.$user->level.'" WHERE username="'.$user->name.'"';
+            $query = $db->prepare($queryString);
+            $query->execute();
+            error_log("Query: ".$queryString);
+        }
     }
 } 
 catch(PDOException $e) {

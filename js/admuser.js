@@ -119,12 +119,13 @@ function FillLevel(users){
         form = $('#manageUserForm select:input');
         var request = {};
         request.session = sessionId;
+        request.operation = "setlevel";
         request.users = new Array();
         form.each(function() {
             request.users.push({"level": LEVELS[this.value], "name": this.name});
         });
 
-        RequestData("./php/userlevel.php", request, function(response){
+        RequestData("./php/users.php", request, function(response){
             AdmUserInit();
             AppendLog("Users levels correctly applied");
         });
