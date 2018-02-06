@@ -65,53 +65,58 @@ function FillMatch(){
 
         RequestData("./php/days.php", request, function(response2){
             let html = 
-            '<table style="margin-bottom: 10px;">'+
-                '<tr>'+
-                    '<td class="cell"><b>Championship: </b></td>'+
-                    '<td class="cell">'+response2.championship+'</td>'+
-                '</tr>'+
-                '<tr>'+
-                    '<td class="cell"><b>Day: </b></td>'+
-                    '<td class="cell">'+response2.day+'</td>'+
-                '</tr>'+
-                '<tr>'+
-                    '<td class="cell"><b>Played: </b></td>'+
-                    '<td class="cell">'+match.played+'</td>'+
-                '</tr>'+
+            '<table class="table table-sm" style="width: 50%;">'+
+                '<tbody>'+
+                    '<tr>'+
+                        '<th scope="row">Championship: </th>'+
+                        '<td>'+response2.championship+'</td>'+
+                    '</tr>'+
+                    '<tr>'+
+                        '<th scope="row">Day: </th>'+
+                        '<td>'+response2.day+'</td>'+
+                    '</tr>'+
+                    '<tr>'+
+                        '<th scope="row">Played: </th>'+
+                        '<td>'+match.played+'</td>'+
+                    '</tr>'+
+                '</tbody>'+
             '</table>';
             html +=
-            '<table class="table">'+
-                '<tr class="title">'+
-                    '<td class="cell"></td>'+
-                    '<td class="cell">Host</td>'+
-                    '<td class="cell">-</td>'+
-                    '<td class="cell">Guest</td>'+
-                '</tr>'+
-                '<tr>'+
-                    '<td class="cell">Player</td>'+
-                    '<td class="cell">'+match.p1+'</td>'+
-                    '<td class="cell">-</td>'+
-                    '<td class="cell">'+match.p2+'</td>'+
-                '</tr>';
+            '<table class="table table-striped">'+
+                '<thead>'+
+                    '<tr>'+
+                        '<th scope="col"></th>'+
+                        '<th scope="col">Host</th>'+
+                        '<th scope="col">-</th>'+
+                        '<th scope="col">Guest</th>'+
+                    '</tr>'+
+                '<thead>'+
+                '<tbody>'+
+                    '<tr>'+
+                        '<th scope="row">Player</th>'+
+                        '<td>'+match.p1+'</td>'+
+                        '<td>-</td>'+
+                        '<td>'+match.p2+'</td>'+
+                    '</tr>';
             if (userLevel === LEVELS.Admin){
                 html +=
                 '<tr>'+
-                    '<td class="cell">Objectives</td>'+
-                    '<td class="cell">'+
+                    '<th scope="row">Objectives</th>'+
+                    '<td>'+
                         '<input type="number" class="form-control" id="inputObj1" value="'+match.obj1+'">'+
                     '</td>'+
-                    '<td class="cell">-</td>'+
-                    '<td class="cell">'+
+                    '<td>-</td>'+
+                    '<td>'+
                         '<input type="number" class="form-control" id="inputObj2" value="'+match.obj2+'">'+
                     '</td>'+
                 '</tr>'+
                 '<tr>'+
-                    '<td class="cell">Points lost</td>'+
-                    '<td class="cell">'+
+                    '<th scope="row">Points lost</th>'+
+                    '<td>'+
                         '<input type="number" class="form-control" id="inputLost1" value="'+match.lost1+'">'+
                     '</td>'+
-                    '<td class="cell">-</td>'+
-                    '<td class="cell">'+
+                    '<td>-</td>'+
+                    '<td>'+
                         '<input type="number" class="form-control" id="inputLost2" value="'+match.lost2+'">'+
                     '</td>'+
                 '</tr>';
@@ -119,19 +124,19 @@ function FillMatch(){
             else {
                 html +=
                 '<tr>'+
-                    '<td class="cell">Objectives</td>'+
-                    '<td class="cell">'+match.obj1+'</td>'+
-                    '<td class="cell">-</td>'+
-                    '<td class="cell">'+match.obj2+'</td>'+
+                    '<th scope="row">Objectives</th>'+
+                    '<td>'+match.obj1+'</td>'+
+                    '<td>-</td>'+
+                    '<td>'+match.obj2+'</td>'+
                 '</tr>'+
                 '<tr>'+
-                    '<td class="cell">Points lost</td>'+
-                    '<td class="cell">'+match.lost1+'</td>'+
-                    '<td class="cell">-</td>'+
-                    '<td class="cell">'+match.lost2+'</td>'+
+                    '<th scope="row">Points lost</th>'+
+                    '<td>'+match.lost1+'</td>'+
+                    '<td>-</td>'+
+                    '<td>'+match.lost2+'</td>'+
                 '</tr>';
             }
-            html += '</table>';
+            html += '</tbody></table>';
             if (userLevel === LEVELS.Admin){
                 html += '<button type="button" id="saveMatch" class="btn btn-dark">Save</button>';
             }

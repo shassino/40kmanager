@@ -6,20 +6,3 @@
 .hidden {
     display: none;
 }
-
-.title {
-    font-weight: bold;
-    background-color: #b8b8b8;
-}
-
-.table {
-    border: solid; 
-    border-color: #b8b8b8;
-    border-width: 1px;
-    width: 100%; 
-    text-align: center;
-}
-
-.cell {
-    padding: 5px;
-}

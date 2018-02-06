@@ -48,18 +48,22 @@ function FillMatches(){
     request.operation = "list";
     var toggle = 0;
     RequestData("./php/matches.php", request, function(response){
-        var html = '<table class="table">'+
-        '<tr class="title">'+
-            '<td style="padding: 5px;">Day</td>'+
-            '<td style="padding: 5px;">Host</td>'+
-            '<td style="padding: 5px;">Guest</td>'+
-            '<td style="padding: 5px;">View match</td>'+
-            '<td style="padding: 5px;">Delete match</td>'+
-        '</tr>';
+        var html = '<div class="table-responsive"><table class="table table-striped">'+
+        '<thead>'+
+            '<tr>'+
+                '<th scope="col">Day</th>'+
+                '<th scope="col">Host</th>'+
+                '<th scope="col">Guest</th>'+
+                '<th scope="col">View match</th>'+
+                '<th scope="col">Delete match</th>'+
+            '</tr>'+
+        '<thead>'+
+        '<tbody>';
         for (var match of response.matches){
             toggle = !toggle;
             html += 
-            ((toggle) ? '<tr>' : '<tr style="background-color: #ebebeb;">')+
+            //((toggle) ? '<tr>' : '<tr style="background-color: #ebebeb;">')+
+            '<tr>'+
                 '<td>'+
                     '<a href="#round-'+match.day+'" class="card-link">'+match.day+'</a>'+
                 '</td>'+
@@ -72,12 +76,12 @@ function FillMatches(){
                 '<td>'+
                     '<a href="#match-'+match.matchId+'" class="card-link">view</a>'+
                 '</td>'+
-                '<td style="padding: 5px;">'+
+                '<td>'+
                     '<button type="button" id="delmatch'+match.matchId+'" class="btn btn-dark">Delete</button>'+
                 '</td>'+
             '</tr>';
         }
-        html += '</table>'
+        html += '</tbody></table></div>';
         $("#champSettingsDiv").html(html);
 
         for (var match of response.matches){

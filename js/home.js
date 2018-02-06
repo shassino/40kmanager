@@ -38,27 +38,30 @@ function homeOnLoad(){
 function FillPlayed(played){
     let count = 0;
     let html = 
-    '<table class="table">'+
-        '<tr class="title">'+
-            '<td style="padding: 5px;">Host</td>'+
-            '<td style="padding: 5px;"></td>'+
-            '<td style="padding: 5px;">Guest</td>'+
-            '<td style="padding: 5px;">View match</td>'+
-        '</tr>';
+    '<table class="table table-striped">'+
+        '<thead>'+
+            '<tr>'+
+                '<th scope="col">Host</th>'+
+                '<th scope="col"></th>'+
+                '<th scope="col">Guest</th>'+
+                '<th scope="col">View match</th>'+
+            '</tr>'+
+        '<thead>'+
+        '<tbody>';
     for (match of played){
         if (count > 10){
             break;
         }
         html += 
             '<tr>'+
-                '<td style="padding: 5px;"><a href="#user-'+match.p1+'" class="card-link">'+match.p1+'</a></td>'+
-                '<td style="padding: 5px;">'+match.obj1+'-'+match.obj2+'</td>'+
-                '<td style="padding: 5px;"><a href="#user-'+match.p2+'" class="card-link">'+match.p2+'</a></td>'+
-                '<td style="padding: 5px;"><a href="#match-'+match.matchId+'" class="card-link">view</a></td>'+
+                '<td><a href="#user-'+match.p1+'" class="card-link">'+match.p1+'</a></td>'+
+                '<td>'+match.obj1+'-'+match.obj2+'</td>'+
+                '<td><a href="#user-'+match.p2+'" class="card-link">'+match.p2+'</a></td>'+
+                '<td><a href="#match-'+match.matchId+'" class="card-link">view</a></td>'+
             '</tr>';
         count += 1;
     }
-    html += '</table>'
+    html += '</tbody></table>';
     $("#lastBattlesDiv").html(html);
 }
 
@@ -73,27 +76,30 @@ function FillRanking(played){
 function FillUpcoming(notPlayed){
     let count = 0;
     let html = 
-    '<table class="table">'+
-        '<tr class="title">'+
-            '<td style="padding: 5px;">Host</td>'+
-            '<td style="padding: 5px;"></td>'+
-            '<td style="padding: 5px;">Guest</td>'+
-            '<td style="padding: 5px;">View match</td>'+
-        '</tr>';
+    '<table class="table table-striped">'+
+        '<thead>'+
+            '<tr>'+
+                '<th scope="col">Host</th>'+
+                '<th scope="col"></th>'+
+                '<th scope="col">Guest</th>'+
+                '<th scope="col">View match</th>'+
+            '</tr>'+
+        '<thead>'+
+        '<tbody>';
     for (match of notPlayed){
         if (count > 10){
             break;
         }
         html += 
             '<tr>'+
-                '<td style="padding: 5px;"><a href="#user-'+match.p1+'" class="card-link">'+match.p1+'</a></td>'+
-                '<td style="padding: 5px;">Vs</td>'+
-                '<td style="padding: 5px;"><a href="#user-'+match.p2+'" class="card-link">'+match.p2+'</a></td>'+
-                '<td style="padding: 5px;"><a href="#match-'+match.matchId+'" class="card-link">view</a></td>'+
+                '<td><a href="#user-'+match.p1+'" class="card-link">'+match.p1+'</a></td>'+
+                '<td>Vs</td>'+
+                '<td><a href="#user-'+match.p2+'" class="card-link">'+match.p2+'</a></td>'+
+                '<td><a href="#match-'+match.matchId+'" class="card-link">view</a></td>'+
             '</tr>';
         count += 1;
     }
-    html += '</table>'
+    html += '</tbody></table>';
     $("#upcomingBattlesDiv").html(html);
 }
 //# sourceURL=./js/home.js
