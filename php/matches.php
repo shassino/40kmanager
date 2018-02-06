@@ -50,6 +50,13 @@ try{
             $query->execute();
             SendJson($response);
             return;
+        case "report":
+            include('includes/requireAdmin.php');
+            $queryString = 'UPDATE matches SET report='.$db->quote($post->report).' WHERE matchId="'.$post->matchId.'"';
+            error_log("Query: ".$queryString);
+            $query = $db->prepare($queryString);
+            $query->execute();
+            SendJson($response);
         case "list":
             include('includes/requireSession.php');
             /* get the matches of the championship */

@@ -13,7 +13,7 @@ $response = new Response; //init the empty object
 include('includes/requireAdmin.php');
 try {
     /* deactivate previous championships */
-    $queryString = 'UPDATE championship SET rules="'.$post->rules.'" WHERE active=1';
+    $queryString = 'UPDATE championship SET rules='.$db->quote($post->rules).' WHERE active=1';
     error_log("Query: ".$queryString);
     $query = $db->prepare($queryString);
     $query->execute();

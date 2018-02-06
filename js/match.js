@@ -7,6 +7,19 @@ function matchOnLoad(param){
 
     if (userLevel === LEVELS.Admin){
         $('#logCard').removeClass("hidden");
+        $('#reportFooter').removeClass("hidden");
+
+        $('#saveReport').click(function(){
+            var request = {};
+            request.session = GetSessionId();
+            request.operation = 'report';
+            request.matchId = matchId;
+            request.report = tinymce.activeEditor.getContent();
+
+            RequestData("./php/matches.php", request, function(response){
+                AppendLog("Report saved");         
+            });
+        });
     }
 }
 
@@ -16,7 +29,13 @@ function FillReport(){
     request.session = GetSessionId();
     request.matchId = matchId;
     RequestData("./php/matches.php", request, function(response){
-        $('#reportDiv').html(response.report);
+        if (userLevel === LEVELS.Admin){
+            AddEditor('#reportTextArea');
+            EditorFill(response.matches[0].report);
+        }
+        else {
+            $('#reportDiv').html(response.matches[0].report);
+        }
     });
 }
 
