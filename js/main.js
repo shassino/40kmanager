@@ -29,6 +29,7 @@ function LocationSwitch(newHash) {
             LoadInContainerIfAdmin(operation);
             break;
         //with admin and no css
+        case "admrounds":
         case "admsettings":
         case "admmatches":
             LoadInContainerIfAdmin(operation, false);

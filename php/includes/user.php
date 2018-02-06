@@ -117,20 +117,5 @@ class User extends Password{
 			error_log('getUserLevel: '.$e->getMessage());
 		}
 	}
-
-	public function getUsersAndLevels(){
-		try {
-			$query = $this->_db->prepare('SELECT username,level FROM levels ORDER BY username');
-			$query->execute();
-			$results = array();
-			while ($row = $query->fetch()) {
-				array_push($results, $row);
-			}
-			return $results;
-		} 
-		catch(PDOException $e) {
-			error_log('getUsersAndLevels: '.$e->getMessage());
-		}
-	}
 }
 ?>

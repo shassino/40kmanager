@@ -24,8 +24,9 @@ function AdmUserInit(){
     //request the user list with level
     var request = {};
     request.session = GetSessionId();
+    request.operation = "listWithLev";
     
-    RequestData("./php/userlist.php", request, function(response){
+    RequestData("./php/users.php", request, function(response){
         FillDelete(response.users);
         FillLevel(response.users);
     });

@@ -1,8 +1,9 @@
 function admmatchesOnLoad(){
     var request = {};
     request.session = GetSessionId();
+    request.operation = "list";
 
-    RequestData("./php/userlistactive.php", request, function(response){
+    RequestData("./php/users.php", request, function(response){
         html = '';
         for (user of response.users){
             html += '<option>'+user+'</option>';
