@@ -36,7 +36,7 @@ try{
             return;
         case "add":
             include('includes/requireAdmin.php');
-            $queryString = 'INSERT into matches (p1,p2,day,played) VALUES("'.$post->p1.'","'.$post->p2.'","'.$post->day.'",0)';
+            $queryString = 'INSERT into matches (p1,p2,day,played,round) VALUES("'.$post->p1.'","'.$post->p2.'","'.$post->day.'",0,"'.$post->round.'")';
             error_log("Query: ".$queryString);
             $query = $db->prepare($queryString);
             $query->execute();
@@ -59,15 +59,15 @@ try{
             SendJson($response);
         case "list":
             /* get the matches of the championship */
-            $queryString = 'SELECT p1,p2,day,matchId,obj1,obj2,lost1,lost2,report,played FROM matches ORDER BY day';
+            $queryString = 'SELECT p1,p2,day,matchId,obj1,obj2,lost1,lost2,report,played,round FROM matches ORDER BY day';
             break;
         case "player":
             /* get the requester match of the championship */
-            $queryString = 'SELECT p1,p2,day,matchId,obj1,obj2,lost1,lost2,report,played FROM matches WHERE p1="'.$post->player.'" OR p2="'.$post->player.'" ORDER BY day';
+            $queryString = 'SELECT p1,p2,day,matchId,obj1,obj2,lost1,lost2,report,played,round FROM matches WHERE p1="'.$post->player.'" OR p2="'.$post->player.'" ORDER BY day';
             break;
         case "single":
             /* get the requester match of the championship */
-            $queryString = 'SELECT p1,p2,day,matchId,obj1,obj2,lost1,lost2,report,played FROM matches WHERE matchId="'.$post->matchId.'" ORDER BY day';
+            $queryString = 'SELECT p1,p2,day,matchId,obj1,obj2,lost1,lost2,report,played,round FROM matches WHERE matchId="'.$post->matchId.'" ORDER BY day';
             break;
         default:
             $response->status = "Error: wrong operation or no operation selected";
@@ -90,6 +90,7 @@ try{
         $match->report = $row['report'];
         $match->played = $row['played'];
         $match->matchId = $row['matchId'];
+        $match->round = $row['round'];
         array_push($response->matches, $match);
     }
 }

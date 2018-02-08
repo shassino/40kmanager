@@ -51,6 +51,7 @@ CREATE TABLE `matches` (
   `p1` varchar(255) NOT NULL,
   `p2` varchar(255) NOT NULL,
   `day` varchar(255) NOT NULL,
+  `round` varchar(255) NOT NULL,
   `obj1` int(16) NOT NULL,
   `obj2` int(16) NOT NULL,
   `lost1` int(16) NOT NULL,
