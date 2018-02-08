@@ -58,6 +58,12 @@ try {
                 $query->execute();
             }
         }
+
+        /* delete dupes */
+        $queryString = 'DELETE t1 FROM userInRounds t1 INNER JOIN userInRounds t2 WHERE t1.userID < t2.userID AND t1.round = t2.round AND t1.user = t2.user';
+        error_log("Query: ".$queryString);
+        $query = $db->prepare($queryString);
+        $query->execute();
         break;
 
     case "listusers":
@@ -69,6 +75,19 @@ try {
             array_push($response->users, $row['user']);
         }
         array_push($response->rounds, $post->round);
+        break;
+        
+    case "delusers":
+        include('includes/requireAdmin.php');
+        foreach($post->rounds as $round){
+            foreach($round->users as $user){
+                $queryString = 'DELETE from userInRounds WHERE round="'.$round->name.'" AND user="'.$user.'"';
+                error_log("Query: ".$queryString);
+                $query = $db->prepare($queryString);
+                $query->execute();
+            }
+        }
+
         break;
     }
 }

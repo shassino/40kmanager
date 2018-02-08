@@ -1,4 +1,5 @@
 var rounds;
+
 function admroundsOnLoad(){
     var request = {};
     request.session = GetSessionId();
@@ -79,6 +80,7 @@ function FillRoundsSelector(rounds){
 }
 
 function FillUserListDiv(){
+    $('#userPerRoundsDiv').html("");
     var request = {};
     request.session = GetSessionId();
     request.operation = "listusers";
@@ -86,19 +88,40 @@ function FillUserListDiv(){
         request.round = round;
         RequestData("./php/rounds.php", request, function(response){
             let round = response.rounds[0];
-            var html = 
+            let html = 
                 '<div class="form-group">'+
                     '<label for="round'+round+'Selector" class="form-label-sm">'+round+'</label>'+
-                    '<select multiple class="form-control" id="round'+round+'Selector" style="overflow-y: auto !important; height: ' + (14 + 22 * rounds.length) + 'px;">';
+                    '<select multiple class="form-control" id="round'+round+'Selector" style="overflow-y: auto !important; height: ' + (14 + 22 * response.users.length) + 'px;">';
             
-            for (var user of response.users){
+            for (let user of response.users){
                 html += '<option>'+user+'</option>';
             }
             html +=
                     '</select>'+
                 '</div>';
+
             $('#userPerRoundsDiv').append(html);
         });
     }
+    $('#delUsersButton').click(function(){
+        var request = {};
+        request.session = GetSessionId();
+        request.operation = "delusers";
+        request.rounds = new Array();
+        for (let round of rounds){
+            let newRound = {};
+            newRound.users = new Array();
+            newRound.name = round;
+            form = $('#round'+round+'Selector option:selected');
+            form.each(function() {
+                newRound.users.push(this.value);
+            });
+            request.rounds.push(newRound);
+        }
+        RequestData("./php/rounds.php", request, function(response){
+            AppendLog("Users deleted correctly");
+            FillUserListDiv();
+        });
+    });
 }
 //# sourceURL=./js/admrounds.js
