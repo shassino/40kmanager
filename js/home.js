@@ -70,9 +70,33 @@ function FillStats(played){
 }
 
 function FillRanking(played){
-    CalcRankings(function(ranking){
-        for (round of ranking.rounds){
-            
+    CalcRankings(function(data){
+        for (key in data.rounds){
+            let round = data.rounds[key];
+            let html = 
+                '<label>'+round.name+'</label>'+
+                '<table class="table table-striped">'+
+                    '<thead>'+
+                        '<tr>'+
+                            '<th scope="col">#</th>'+
+                            '<th scope="col">Player</th>'+
+                            '<th scope="col">Points</th>'+
+                        '</tr>'+
+                    '<thead>'+
+                    '<tbody>';
+            let count = 1;
+            for (key in round.users){
+                let user = round.users[key];
+                html +=
+                        '<tr>'+
+                            '<th scope="row">'+count+'</td>'+
+                            '<td><a href="#user-'+user.name+'" class="card-link">'+user.name+'</a></td>'+
+                            '<td>'+user.points+'</td>'+
+                        '</tr>';
+                count += 1;
+            }
+            html += '</tbody></table>';
+            $('#rankingDiv').append(html);
         }
     });
 }
