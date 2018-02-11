@@ -55,7 +55,7 @@ function FillPlayed(played){
         html += 
             '<tr>'+
                 '<td><a href="#user-'+match.p1+'" class="card-link">'+match.p1+'</a></td>'+
-                '<td>'+match.obj1+'-'+match.obj2+'</td>'+
+                '<td>'+match.res1+'-'+match.res2+'</td>'+
                 '<td><a href="#user-'+match.p2+'" class="card-link">'+match.p2+'</a></td>'+
                 '<td><a href="#match-'+match.matchId+'" class="card-link">view</a></td>'+
             '</tr>';

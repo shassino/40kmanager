@@ -72,13 +72,21 @@ function FillMatch(){
                         '<td>'+response2.championship+'</td>'+
                     '</tr>'+
                     '<tr>'+
+                        '<th scope="row">Round: </th>'+
+                        '<td>'+match.round+'</td>'+
+                    '</tr>'+
+                    '<tr>'+
                         '<th scope="row">Day: </th>'+
                         '<td>'+response2.day+'</td>'+
-                    '</tr>'+
+                    '</tr>';
+            if (match.played != "0000-00-00 00:00:00"){
+                html +=
                     '<tr>'+
                         '<th scope="row">Played: </th>'+
                         '<td>'+match.played+'</td>'+
-                    '</tr>'+
+                    '</tr>';
+            }
+            html +=
                 '</tbody>'+
             '</table>';
             html +=
@@ -98,16 +106,35 @@ function FillMatch(){
                         '<td>-</td>'+
                         '<td>'+match.p2+'</td>'+
                     '</tr>';
+            if (match.played != "0000-00-00 00:00:00"){
+                html +=
+                '<tr>'+
+                    '<th scope="row">Result</th>'+
+                    '<td>'+match.res1+'</td>'+
+                    '<td>-</td>'+
+                    '<td>'+match.res2+'</td>'+
+                '</tr>';
+            }
             if (userLevel === LEVELS.Admin){
                 html +=
                 '<tr>'+
-                    '<th scope="row">Objectives</th>'+
+                    '<th scope="row">Primary Objectives</th>'+
                     '<td>'+
                         '<input type="number" class="form-control" id="inputObj1" value="'+match.obj1+'">'+
                     '</td>'+
                     '<td>-</td>'+
                     '<td>'+
                         '<input type="number" class="form-control" id="inputObj2" value="'+match.obj2+'">'+
+                    '</td>'+
+                '</tr>'+
+                '<tr>'+
+                    '<th scope="row">Secondary Objectives</th>'+
+                    '<td>'+
+                        '<input type="number" class="form-control" id="inputSec1" value="'+match.sec1+'">'+
+                    '</td>'+
+                    '<td>-</td>'+
+                    '<td>'+
+                        '<input type="number" class="form-control" id="inputSec2" value="'+match.sec2+'">'+
                     '</td>'+
                 '</tr>'+
                 '<tr>'+
@@ -124,10 +151,16 @@ function FillMatch(){
             else {
                 html +=
                 '<tr>'+
-                    '<th scope="row">Objectives</th>'+
+                    '<th scope="row">Primary Objectives</th>'+
                     '<td>'+match.obj1+'</td>'+
                     '<td>-</td>'+
                     '<td>'+match.obj2+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                    '<th scope="row">Secondary Objectives</th>'+
+                    '<td>'+match.sec1+'</td>'+
+                    '<td>-</td>'+
+                    '<td>'+match.sec2+'</td>'+
                 '</tr>'+
                 '<tr>'+
                     '<th scope="row">Points lost</th>'+
@@ -150,8 +183,14 @@ function FillMatch(){
                     request.matchId = matchId;
                     request.obj1 = $('#inputObj1').val();
                     request.obj2 = $('#inputObj2').val();
+                    request.sec1 = $('#inputSec1').val();
+                    request.sec2 = $('#inputSec2').val();
                     request.lost1 = $('#inputLost1').val();
                     request.lost2 = $('#inputLost2').val();
+
+                    let result = CalcResult(request);
+                    request.res1 = result.pt1;
+                    request.res2 = result.pt2;
                     RequestData("./php/matches.php", request, function(response){
                         AppendLog("Result updated");
                         FillMatch();
@@ -162,8 +201,31 @@ function FillMatch(){
     });
 }
 
-function EnableAdminPanel(){
-
+function CalcResult(request){
+    var response = {};
+    if (request.obj1 > request.obj2){
+        response.pt1 = 5;
+        response.pt2 = 1;
+    }
+    else if (request.obj1 < request.obj2){
+        response.pt1 = 1;
+        response.pt2 = 5;
+    }
+    else {
+        if (request.sec1 > request.sec2){
+            response.pt1 = 4;
+            response.pt2 = 2;
+        }
+        else if (request.sec2 > request.sec1){
+            response.pt1 = 2;
+            response.pt2 = 4;
+        }
+        else {
+            response.pt1 = 3;
+            response.pt2 = 3;
+        }
+    }
+    return response;
 }
 
 //# sourceURL=./js/match.js

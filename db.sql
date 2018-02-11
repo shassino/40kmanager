@@ -54,8 +54,12 @@ CREATE TABLE `matches` (
   `round` varchar(255) NOT NULL,
   `obj1` int(16) NOT NULL,
   `obj2` int(16) NOT NULL,
+  `sec1` int(16) NOT NULL,
+  `sec2` int(16) NOT NULL,
   `lost1` int(16) NOT NULL,
   `lost2` int(16) NOT NULL,
+  `res1` int(16) NOT NULL,
+  `res2` int(16) NOT NULL,
   `report` longtext NOT NULL,
   `played` datetime NOT NULL,
   PRIMARY KEY (`matchID`)

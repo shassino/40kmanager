@@ -1,6 +1,7 @@
 //If this change update utils.php
 var LEVELS = Object.freeze({"Inactive":-1, "Admin":0, "User":1});
 var LEVELS_STRINGS = ["Inactive", "Admin", "User"];
+var PointsType = Object.freeze({"th":0, "sum":1, "abs":2, "or":3, "and":4});
 var sessionId = "";
 var userLevel = LEVELS.Inactive;
 
