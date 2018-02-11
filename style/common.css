@@ -6,3 +6,7 @@
 .hidden {
     display: none;
 }
+
+.fill-height {
+    min-height: 100% !important;
+}
