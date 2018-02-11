@@ -129,3 +129,49 @@ function SetCounterCallback(param, OnLoad){
         }, 10);
     }
 }
+
+function GetPlayedMatches(OnLoad){
+    let request = {};
+    request.operation = "list";
+
+    let played = [];
+
+    RequestData("./php/matches.php", request, function(response){
+        for (match of response.matches){
+            if (match.played !== "0000-00-00 00:00:00"){
+                played.push(match);
+            }
+        }
+
+        played.sort(function(a, b){
+            if (a.played === b.played){
+                return 0;
+            }
+            if (a.played < b.played){
+                return -1;
+            }
+            if (a.played > b.played){
+                return 1;
+            }
+        });
+
+        OnLoad(played);
+    });
+}
+
+function GetNotPlayedMatches(OnLoad){
+    let request = {};
+    request.operation = "list";
+
+    let notPlayed = [];
+    
+    RequestData("./php/matches.php", request, function(response){
+        for (match of response.matches){
+            if (match.played === "0000-00-00 00:00:00"){
+                notPlayed.push(match);
+            }
+        }
+
+        OnLoad(notPlayed);
+    });
+}

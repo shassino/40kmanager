@@ -2,34 +2,13 @@ function homeOnLoad(){
     let request = {};
     request.operation = "list";
 
-    let notPlayed = [];
-    let played = [];
-
-    RequestData("./php/matches.php", request, function(response){
-        for (match of response.matches){
-            if (match.played === "0000-00-00 00:00:00"){
-                notPlayed.push(match);
-            }
-            else {
-                played.push(match);
-            }
-        }
-
-        played.sort(function(a, b){
-            if (a.played === b.played){
-                return 0;
-            }
-            if (a.played < b.played){
-                return -1;
-            }
-            if (a.played > b.played){
-                return 1;
-            }
-        });
-
+    GetPlayedMatches(function(played){
         FillPlayed(played);
         FillStats(played);
         FillRanking(played);
+    });
+
+    GetNotPlayedMatches(function(notPlayed){
         FillUpcoming(notPlayed);
     });
 }

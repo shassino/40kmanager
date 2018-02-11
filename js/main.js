@@ -35,9 +35,16 @@ function LocationSwitch(newHash) {
         case "admmatches":
             LoadInContainerIfAdmin(operation, false);
             break;
-        //everyone with no css and no params
+        //everyone with css and no params
         case "hexmap":
-            LoadInContainer("hexmap");
+            LoadInContainer(operation);
+            break;
+        //everyone with no css and no params
+        case "upcoming":
+        case "recent":
+        case "forces":
+        case "rules":
+            LoadInContainer(operation, false);
             break;
         //everyone with no css and params
         case "match":
