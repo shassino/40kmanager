@@ -70,7 +70,11 @@ function FillStats(played){
 }
 
 function FillRanking(played){
-
+    CalcRankings(function(ranking){
+        for (round of ranking.rounds){
+            
+        }
+    });
 }
 
 function FillUpcoming(notPlayed){

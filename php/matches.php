@@ -67,6 +67,10 @@ try{
             /* get the requester match of the championship */
             $queryString = 'SELECT * FROM matches WHERE p1="'.$post->player.'" OR p2="'.$post->player.'" ORDER BY day';
             break;
+        case "round":
+            /* get the requester match of the championship */
+            $queryString = 'SELECT * FROM matches WHERE round="'.$post->round.'" ORDER BY day';
+            break;
         case "single":
             /* get the requester match of the championship */
             $queryString = 'SELECT * FROM matches WHERE matchId="'.$post->matchId.'" ORDER BY day';

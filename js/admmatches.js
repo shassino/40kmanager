@@ -1,12 +1,7 @@
 var rounds;
 function admmatchesOnLoad(){
-    var request = {};
-    request.operation = "getcurrent";
-    request.session = GetSessionId();
-    RequestData("./php/championship.php", request, function(response){
-        request.operation = "list";
-        request.championship = response.name;
-        RequestData("./php/rounds.php", request, function(response){
+    GetCurrentChampionship(function(response){
+        GetChampionshipRounds(response.name, function(response){
             rounds = response.rounds;
             FillMatchCreatorDiv();
         });
@@ -86,14 +81,9 @@ function FillMatchCreatorDiv(){
         for (var day of response.days){
             htmlDay += '<option>'+day+'</option>';
         }
-        
-        var request = {};
-        request.session = GetSessionId();
-        request.operation = "listusers";
 
         for (let round of rounds){
-            request.round = round;
-            RequestData("./php/rounds.php", request, function(response){
+            GetRoundUsers(round, function(response){
                 let htmlUser = "";
                 for (let user of response.users){
                     htmlUser += '<option>'+user+'</option>';

@@ -9,11 +9,8 @@ function admroundsOnLoad(){
         FillUsersSelector(response.users);
     });
 
-    request.operation = "getcurrent";
-    RequestData("./php/championship.php", request, function(response){
-        request.operation = "list";
-        request.championship = response.name;
-        RequestData("./php/rounds.php", request, function(response){
+    GetCurrentChampionship(function(response){
+        GetChampionshipRounds(response.name, function(response){
             FillRoundsSelector(response.rounds);
             rounds = response.rounds;
             FillUserListDiv();
@@ -81,12 +78,9 @@ function FillRoundsSelector(rounds){
 
 function FillUserListDiv(){
     $('#userPerRoundsDiv').html("");
-    var request = {};
-    request.session = GetSessionId();
-    request.operation = "listusers";
+    
     for (let round of rounds){
-        request.round = round;
-        RequestData("./php/rounds.php", request, function(response){
+        GetRoundUsers(round, function(response){
             let round = response.rounds[0];
             let html = 
                 '<div class="form-group">'+
