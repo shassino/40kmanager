@@ -4,13 +4,14 @@ function homeOnLoad(){
 
     GetPlayedMatches(function(played){
         FillPlayed(played);
-        FillStats(played);
-        FillRanking(played);
     });
-
+    
     GetNotPlayedMatches(function(notPlayed){
         FillUpcoming(notPlayed);
     });
+    
+    FillStats();
+    FillRanking();
 }
 
 
@@ -44,11 +45,11 @@ function FillPlayed(played){
     $("#lastBattlesDiv").html(html);
 }
 
-function FillStats(played){
+function FillStats(){
 
 }
 
-function FillRanking(played){
+function FillRanking(){
     CalcRankings(function(data){
         for (key in data.rounds){
             let round = data.rounds[key];
@@ -65,6 +66,9 @@ function FillRanking(played){
                     '<tbody>';
             let count = 1;
             for (key in round.users){
+                if (count > 3){
+                    break;
+                }
                 let user = round.users[key];
                 html +=
                         '<tr>'+

@@ -2,9 +2,7 @@ function rankingOnLoad(){
     let request = {};
     request.operation = "list";
 
-    GetPlayedMatches(function(played){
-        FillRanking(played);
-    });
+    FillRanking();
 }
 
 function FillRanking(played){

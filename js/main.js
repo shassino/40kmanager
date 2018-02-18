@@ -85,7 +85,12 @@ function LoadHome(){
 }
 
 function LoadInContainer(item, css = true, param = null){
-    UpdateHash('#'+item);
+    if (param != null){
+        UpdateHash('#'+item+"-"+param);
+    }
+    else {
+        UpdateHash('#'+item);
+    }
     if (css){
         LoadCss(item);
     }
