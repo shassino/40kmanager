@@ -14,7 +14,7 @@ class Response {
 
 $response = new Response; //init the empty object
 
-include('includes/requireAdmin.php');
+//include('includes/requireAdmin.php');
 try {
     /* get the active championship name and rules */
     $queryString = 'SELECT name,rules FROM championship WHERE active=1';
