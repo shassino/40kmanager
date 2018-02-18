@@ -65,16 +65,19 @@ CREATE TABLE `matches` (
   PRIMARY KEY (`matchID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
-CREATE TABLE `army` (
-  `armyID` int(11) NOT NULL AUTO_INCREMENT,
-  `user` varchar(255) NOT NULL,
-  `list` longtext NOT NULL,
-  PRIMARY KEY (`armyID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
 CREATE TABLE `userInRounds` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
   `user` varchar(255) NOT NULL,
   `round` varchar(255) NOT NULL,
   PRIMARY KEY (`userID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+CREATE TABLE `profiles` (
+  `profileID` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `faction` varchar(255) NOT NULL,
+  `armyname` varchar(255) NOT NULL,
+  `list` longtext NOT NULL,
+  `tokens` int(16) NOT NULL,
+  PRIMARY KEY (`profileID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;

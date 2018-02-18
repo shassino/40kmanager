@@ -11,6 +11,17 @@ class Response {
 
 $response = new Response; //init the empty object
 
+class Profile {
+    public $status = "OK";
+    public $username = "";
+    public $faction;
+    public $armyname;
+    public $list;
+    public $tokens;
+}
+
+$profile = new Profile;
+
 try {
     switch ($post->operation){
     default:
@@ -53,6 +64,51 @@ try {
             $query->execute();
             error_log("Query: ".$queryString);
         }
+        break;
+
+    case "getprofile":
+        $queryString = 'SELECT username, faction, armyname, list, tokens FROM profiles WHERE username="'.$post->username.'"';
+        $query = $db->prepare($queryString);
+        $query->execute();
+
+        $row = $query->fetch();
+        if ($row){
+            $profile->username = $row['username'];
+            $profile->faction = $row['faction'];
+            $profile->armyname = $row['armyname'];
+            $profile->list = $row['list'];
+            $profile->tokens = $row['tokens'];
+        }
+
+        SendJson($profile);
+        break;
+
+    case "setprofile":
+        include('includes/requireSession.php');
+        $queryString = 'SELECT username, tokens FROM profiles WHERE username="'.$username.'"';
+        $query = $db->prepare($queryString);
+        $query->execute();
+
+        $row = $query->fetch();
+        if ($row){
+            $tokens = $row['tokens'];
+            if ($tokens > 0){
+                $tokens -= 1;
+                $queryString = 'UPDATE profiles SET armyname="'.$post->armyname.'", list='.$db->quote($post->list).', tokens='.$tokens.' WHERE username="'.$username.'"';
+            }
+            else {
+                $response->status = "Error: no more update tokens availables";
+                break;
+            }
+        }
+        else {
+            $queryString = 'INSERT into profiles (faction,tokens,username) VALUES("'.$post->faction.'", 3,"'.$username.'")';
+        }
+
+        $query = $db->prepare($queryString);
+        $query->execute();
+
+        break;
     }
 } 
 catch(PDOException $e) {

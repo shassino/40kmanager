@@ -1,3 +1,35 @@
+var FACTIONS = Object.freeze({
+    "Space Marines": 0,
+    "Ultramarines": 1,
+    "Blood Angels": 2,
+    "Dark Angels": 3,
+    "Deathwatch": 4,
+    "Grey Knights": 5,
+    "Space Wolves": 6,
+    "Astra Militarum": 7,
+    "Adeptus Ministorum": 8,
+    "Adeptus Custodes": 9,
+    "Sisters of Silence": 10,
+    "Adeptus Mechanicus": 11,
+    "Inquisition": 12,
+    "Imperial Knights": 13,
+    "Officio Assassinorum": 14,
+    "Chaos Space Marines": 15,
+    "Death Guard": 16,
+    "Thousand Sons": 17,
+    "Renegade Knights": 18,
+    "Chaos Daemons": 19,
+    "Orks": 20,
+    "Harlequins": 21,
+    "Ynnari": 22,
+    "Necrons": 23,
+    "T'au Empire": 24,
+    "Tyranids": 25,
+    "Genestealer Cults": 26,
+    "Craftworlds": 27,
+    "Drukhari": 28
+});
+
 function GetCurrentChampionship(OnLoad){
     let request = {};
     request.operation = "getcurrent";

@@ -1,6 +1,7 @@
 function menuOnLoad() {
     LoadLoginDropdown(); //Fill login dropdown
     DisableAdmin();
+    DisableUser();
 };
 
 function LoadLoginDropdown(){
@@ -40,11 +41,15 @@ function LoadLoginDropdown(){
                 else {
                     sessionId = response.session;
                     userLevel = Number(response.level);
+                    username = values["username"];
                     LoadLogoutDropdown(values["username"]);
                     $("#navbarLoginDropdown").click();
                     if (userLevel === LEVELS.Admin){
                         //Enable Admin menu
                         EnableAdmin();
+                    }
+                    if (userLevel > LEVELS.Inactive){
+                        EnableUser();
                     }
                 }
             }
@@ -85,6 +90,7 @@ function LoadLogoutDropdown(username){
                     userLevel = LEVELS.Inactive;
                     LoadLoginDropdown();
                     DisableAdmin();
+                    DisableUser();
                     LoadHome();
                 }
                 else {
@@ -110,4 +116,11 @@ function EnableAdmin(){
 
 function DisableAdmin(){
     $("#adminMenuItem").addClass("hidden");
+}
+
+function EnableUser(){
+    $("#userMenuItem").removeClass("hidden");
+}
+function DisableUser(){
+    $("#userMenuItem").addClass("hidden");
 }

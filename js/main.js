@@ -4,6 +4,7 @@ var LEVELS_STRINGS = ["Inactive", "Admin", "User"];
 var PointsType = Object.freeze({"th":0, "sum":1, "abs":2, "or":3, "and":4});
 var sessionId = "";
 var userLevel = LEVELS.Inactive;
+var username = "";
 
 var hash = "#"; /* current hash of the page */
 
@@ -44,6 +45,7 @@ function LocationSwitch(newHash) {
         case "recent":
         case "forces":
         case "rules":
+        case "usrprofile":
             LoadInContainer(operation, false);
             break;
         //everyone with no css and params

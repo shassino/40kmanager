@@ -77,7 +77,7 @@ class User extends Password{
 		return $uuid;
 	}
 	
-	private function getUserFromSessionID($uuid){
+	public function getUserFromSessionID($uuid){
 		$this->deleteExpiredSessions();
 		error_log("Received uuid: ".$uuid);
 		try {

@@ -1,3 +1,3 @@
-function userOnLoad(){
+function userOnLoad(name){
     
 }
