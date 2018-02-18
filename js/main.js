@@ -45,6 +45,7 @@ function LocationSwitch(newHash) {
         case "recent":
         case "forces":
         case "rules":
+        case "ranking":
         case "usrprofile":
             LoadInContainer(operation, false);
             break;

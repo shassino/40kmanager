@@ -119,17 +119,45 @@ function CalcRankings(OnLoad){
                             let newUser = {}
                             newUser.name = match.p1;
                             newUser.points = 0;
+                            newUser.played = 0;
+                            newUser.won = 0;
+                            newUser.tie = 0;
+                            newUser.lost = 0;
                             round.users[newUser.name] = newUser;
                         }
-                        round.users[match.p1].points += Number(match.res1);
-
+                        
                         if (round.users[match.p2] == undefined){
                             let newUser = {}
                             newUser.name = match.p2;
                             newUser.points = 0;
+                            newUser.played = 0;
+                            newUser.won = 0;
+                            newUser.tie = 0;
+                            newUser.lost = 0;
                             round.users[newUser.name] = newUser;
                         }
-                        round.users[match.p2].points += Number(match.res2);
+
+                        if ((Number(match.res1) !== 0) && (Number(match.res2) !== 0)){
+                            //played match
+                            round.users[match.p1].points += Number(match.res1);
+                            round.users[match.p2].points += Number(match.res2);
+
+                            round.users[match.p1].played += 1;
+                            round.users[match.p2].played += 1;
+
+                            if (Number(match.res1) > Number(match.res2)){
+                                round.users[match.p1].won += 1;
+                                round.users[match.p2].lost += 1;
+                            }
+                            else if (Number(match.res1) < Number(match.res2)){
+                                round.users[match.p1].lost += 1;
+                                round.users[match.p2].won += 1;
+                            }
+                            else {
+                                round.users[match.p1].tie += 1;
+                                round.users[match.p2].tie += 1;
+                            }
+                        }
                     }
                     rank.counter -= 1;
                 });
