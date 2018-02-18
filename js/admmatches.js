@@ -90,41 +90,43 @@ function FillMatchCreatorDiv(){
                 }
 
                 let round = response.rounds[0];
+                let id = round.replace(' ', ''); //remove space otherwise callback will not fire
                 let html = 
                 '<div class="form-group">'+
                     '<label class="col-sm-1 col-form-label" style="text-align: center;">'+round+'</label>'+
                     '<div class="form-group row">'+
                         '<div class="col-sm-2">'+
-                            '<select class="form-control" id="'+round+'daySelector" style="width: 100%;">'+
+                            '<select class="form-control" id="'+id+'daySelector" style="width: 100%;">'+
                                 htmlDay+
                             '</select>'+
                         '</div>'+
                         '<label for="inputHost" class="col-sm-2 col-form-label" style="text-align: center;">Host</label>'+
                         '<div class="col-sm-2">'+
-                            '<select class="form-control" id="'+round+'inputHost">'+
+                            '<select class="form-control" id="'+id+'inputHost">'+
                                 htmlUser+
                             '</select>'+
                         '</div>'+
                         '<label class="col-sm-1 col-form-label" style="text-align: center;">Vs</label>'+
                         '<div class="col-sm-2">'+
-                            '<select class="form-control" id="'+round+'inputGuest">'+
+                            '<select class="form-control" id="'+id+'inputGuest">'+
                                 htmlUser+
                             '</select>'+
                         '</div>'+
                         '<label for="inputGuest" class="col-sm-2 col-form-label" style="text-align: center;">Guest</label>'+
-                        '<button type="button" id="'+round+'applyMatchButton" class="btn btn-dark">Add</button>'
+                        '<button type="button" id="'+id+'applyMatchButton" class="btn btn-dark">Add</button>'
                     '</div></div>';
                 $('#matchCreatorDiv').append(html);
 
-                $('#'+round+'applyMatchButton').click({round: round}, function(event){
+                $('#'+id+'applyMatchButton').click({round: round}, function(event){
                     let round = event.data.round;
+                    let id = round.replace(' ', '');
 
                     var request = {};
                     request.operation = "add";
                     request.session = GetSessionId();
-                    request.day = $('#'+round+'daySelector').val();
-                    request.p1 = $('#'+round+'inputHost').val();
-                    request.p2 = $('#'+round+'inputGuest').val();
+                    request.day = $('#'+id+'daySelector').val();
+                    request.p1 = $('#'+id+'inputHost').val();
+                    request.p2 = $('#'+id+'inputGuest').val();
                     request.round = round;
             
                     if (request.p1 === request.p2){
