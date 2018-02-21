@@ -26,9 +26,3 @@
     background-attachment: fixed;
     background-size: contain;
 }
-
-.fadeout {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s 2s, opacity 2s linear;
-}

@@ -18,7 +18,8 @@ $(function(){
 
     SetCounterCallback(toBeLoaded, function(){
         setTimeout(function(){
-            $("#logoDiv").addClass("fadeout");
+            //$("#logoDiv").addClass("fadeout");
+            $("#logoDiv").fadeOut(2000);
         }, 1000);
     })
 });
