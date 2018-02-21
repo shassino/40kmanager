@@ -8,10 +8,17 @@ var username = "";
 
 var hash = "#"; /* current hash of the page */
 
+var toBeLoaded = {};
+toBeLoaded.counter = 2;
+
 $(function(){
     LoadToolBar();
 
     LocationSwitch(window.location.hash);
+
+    SetCounterCallback(toBeLoaded, function(){
+        $("#logoDiv").addClass("fadeout");
+    })
 });
 
 $(window).on('hashchange', function() {
@@ -126,6 +133,7 @@ function LoadScript(item, param){
         else {
             /* Then Run */
             window[item+'OnLoad'](param);
+            toBeLoaded.counter -= 1;
         }
     })
     .fail(function(){
