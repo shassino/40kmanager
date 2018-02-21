@@ -89,7 +89,7 @@ function CalcRankings(OnLoad){
     GetCurrentChampionship(function(champ){
         rank.counter += 1;
         GetChampionshipRounds(champ.name, function(response){
-            for (round of response.rounds){
+            for (let round of response.rounds){
                 rank.counter += 1;
                 let newRound = {};
                 newRound.users = [];
@@ -177,17 +177,6 @@ function CalcRankings(OnLoad){
 
         OnLoad(rankings);
     });
-}
-
-function SetCounterCallback(param, OnLoad){
-    if (param.counter === 0){
-        OnLoad(param);
-    }
-    else {
-        setTimeout(function(){
-            SetCounterCallback(param, OnLoad);
-        }, 10);
-    }
 }
 
 function GetPlayedMatches(OnLoad){

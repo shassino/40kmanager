@@ -25,4 +25,6 @@
     background-position: center; 
     background-attachment: fixed;
     background-size: contain;
+    text-align: center;
+    color: red;
 }

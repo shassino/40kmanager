@@ -28,7 +28,7 @@ a {
 	position: absolute;
 	left: 0px;
 	right: 0px;
-	top: var(--height);
+	top: 56px;
 	bottom: 0px;
 	overflow-y: scroll;
 	background-color: rgb(207, 207, 207);

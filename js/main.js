@@ -1,3 +1,24 @@
+// Opera 8.0+
+var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+// Firefox 1.0+
+var isFirefox = typeof InstallTrigger !== 'undefined';
+
+// Safari 3.0+ "[object HTMLElementConstructor]" 
+var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+
+// Internet Explorer 6-11
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+// Edge 20+
+var isEdge = !isIE && !!window.StyleMedia;
+
+// Chrome 1+
+var isChrome = !!window.chrome && !!window.chrome.webstore;
+
+// Blink engine detection
+var isBlink = (isChrome || isOpera) && !!window.CSS;
+
 //If this change update utils.php
 var LEVELS = Object.freeze({"Inactive":-1, "Admin":0, "User":1});
 var LEVELS_STRINGS = ["Inactive", "Admin", "User"];
@@ -12,14 +33,20 @@ var toBeLoaded = {};
 toBeLoaded.counter = 2;
 
 $(function(){
+    if (isIE){
+        $("#logoDiv").html("<h1>Internet Explorer madness not supported, please use a proper browser</h1>");
+    }
     LoadToolBar();
-
+    
     LocationSwitch(window.location.hash);
-
+    
     SetCounterCallback(toBeLoaded, function(){
         setTimeout(function(){
-            //$("#logoDiv").addClass("fadeout");
-            $("#logoDiv").fadeOut(2000);
+            if (isIE){
+                //$("#logoDiv").addClass("hidden");
+            } else {
+                $("#logoDiv").fadeOut(2000);
+            }
         }, 1000);
     })
 });
@@ -95,8 +122,11 @@ function LoadHome(){
     LoadInContainer("home");
 }
 
-function LoadInContainer(item, css = true, param = null){
-    if (param != null){
+function LoadInContainer(item, css, param){
+    if (css == undefined){
+        css = true;
+    }
+    if (param != undefined){
         UpdateHash('#'+item+"-"+param);
     }
     else {
@@ -118,7 +148,7 @@ function LoadInContainer(item, css = true, param = null){
     });
 }
 
-function LoadInContainerIfAdmin(item, css = true, param = null){
+function LoadInContainerIfAdmin(item, css, param){
     if (userLevel === LEVELS.Admin){
         LoadInContainer(item, css, param);
     }
@@ -225,4 +255,15 @@ function AddEditor(textArea){
     tinymce.activeEditor.on('init',function(){
         editorInited = true;
     });
+}
+
+function SetCounterCallback(param, OnLoad){
+    if (param.counter === 0){
+        OnLoad(param);
+    }
+    else {
+        setTimeout(function(){
+            SetCounterCallback(param, OnLoad);
+        }, 10);
+    }
 }

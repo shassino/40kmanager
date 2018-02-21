@@ -102,7 +102,7 @@ try {
             }
         }
         else {
-            $queryString = 'INSERT into profiles (faction,tokens,username) VALUES("'.$post->faction.'", 3,"'.$username.'")';
+            $queryString = 'INSERT into profiles (faction,tokens,username) VALUES("'.$post->faction.'", 2,"'.$username.'")';
         }
 
         $query = $db->prepare($queryString);
