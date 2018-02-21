@@ -32,4 +32,5 @@ a {
 	bottom: 0px;
 	overflow-y: scroll;
 	background-color: rgb(207, 207, 207);
+	z-index: 0;
 }

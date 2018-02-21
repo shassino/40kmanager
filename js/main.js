@@ -17,7 +17,9 @@ $(function(){
     LocationSwitch(window.location.hash);
 
     SetCounterCallback(toBeLoaded, function(){
-        $("#logoDiv").addClass("fadeout");
+        setTimeout(function(){
+            $("#logoDiv").addClass("fadeout");
+        }, 1000);
     })
 });
 
