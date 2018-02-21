@@ -47,6 +47,7 @@ function LocationSwitch(newHash) {
         case "rules":
         case "ranking":
         case "usrprofile":
+        case "usrsettings":
             LoadInContainer(operation, false);
             break;
         //everyone with no css and params

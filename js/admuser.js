@@ -67,9 +67,9 @@ function FillDelete(users){
             text += "<li>" + this + "</li>";
         });
         text += "</ul>Once applied this cannot be undone."
-        $('#ModalLabel').html("Confirm deletion");
-        $('#modalBody').html(text);
-        $('#modalFooter').html(
+        ModalSetLabel("Confirm deletion");
+        ModalSetBody(text);
+        ModalSetFooter(
             '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>'+
             '<button type="button" class="btn btn-primary" id="modalConfirm" data-dismiss="modal">Apply</button>'
         );
@@ -79,7 +79,7 @@ function FillDelete(users){
                 AdmUserInit();
             });
         });
-        $('#myModal').modal('show');
+        ModalShow();
         e.preventDefault();
     });
 }

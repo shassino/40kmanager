@@ -235,3 +235,19 @@ function GetNotPlayedMatches(OnLoad){
         OnLoad(notPlayed);
     });
 }
+
+function ModalSetLabel(html){
+    $('#ModalLabel').html(html);
+}
+
+function ModalSetBody(html){
+    $('#modalBody').html(html);
+}
+
+function ModalSetFooter(html){
+    $('#modalFooter').html(html);
+}
+
+function ModalShow(){
+    $('#myModal').modal('show');
+}
