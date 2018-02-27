@@ -74,14 +74,35 @@ function FillProfileSelector(response){
         EditorFill(response.list);
 
         $('#applyProfile').click(function(){
-            let request = {};
-            request.session = GetSessionId();
-            request.armyname = $('#armynameInput').val();
-            request.list = tinymce.activeEditor.getContent();
-            request.operation = "setprofile";
-            RequestData("./php/users.php", request, function(response){
-                usrprofileOnLoad();
-            });        
+            if ($('#armynameInput').val().length == 0){
+                ModalSetLabel("Error");
+                ModalSetBody("Armyname cannot be empty");
+                ModalSetFooter('<button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>');
+            }
+            else if (tinymce.activeEditor.getContent().length == 0){
+                ModalSetLabel("Error");
+                ModalSetBody("Army list cannot be empty");
+                ModalSetFooter('<button type="button" class="btn btn-warning" data-dismiss="modal">OK</button>');
+            }
+            else {
+                ModalSetLabel("Confirm list change");
+                ModalSetBody("Do you confirm the list change, once clicked OK one change token will be used for good.");
+                ModalSetFooter(
+                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>'+
+                    '<button type="button" class="btn btn-danger" id="modalConfirm" data-dismiss="modal">OK</button>'
+                );
+                $('#modalConfirm').click(function(){
+                    let request = {};
+                    request.session = GetSessionId();
+                    request.armyname = $('#armynameInput').val();
+                    request.list = tinymce.activeEditor.getContent();
+                    request.operation = "setprofile";
+                    RequestData("./php/users.php", request, function(response){
+                        usrprofileOnLoad();
+                    });        
+                });
+            }
+            ModalShow();
         });
     }
     else {
