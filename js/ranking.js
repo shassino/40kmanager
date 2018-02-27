@@ -11,7 +11,7 @@ function FillRanking(played){
             let round = data.rounds[key];
             let html = 
                 '<label>'+round.name+'</label>'+
-                '<table class="table table-striped">'+
+                '<div class="table-responsive"><table class="table table-striped">'+
                     '<thead>'+
                         '<tr>'+
                             '<th scope="col">#</th>'+
@@ -39,7 +39,7 @@ function FillRanking(played){
                         '</tr>';
                 count += 1;
             }
-            html += '</tbody></table>';
+            html += '</tbody></table></div>';
             $('#rankingDiv').append(html);
         }
     });

@@ -5,7 +5,7 @@ function upcomingOnLoad(){
             if (html[match.day] == undefined){
                 html[match.day] =
                     '<label>'+match.day+'</label>'+
-                    '<table class="table table-striped">'+
+                    '<div class="table-responsive"><table class="table table-striped">'+
                     '<thead>'+
                         '<tr>'+
                             '<th scope="col">Host</th>'+
@@ -30,7 +30,7 @@ function upcomingOnLoad(){
             roundHtml = html[key];
             roundHtml +=
                     '</tbody>'+
-                '</table>';
+                '</table></div>';
             $("#upcomingDiv").append(roundHtml);
         }
     })

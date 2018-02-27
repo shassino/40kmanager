@@ -18,7 +18,7 @@ function homeOnLoad(){
 function FillPlayed(played){
     let count = 0;
     let html = 
-    '<table class="table table-striped">'+
+    '<div class="table-responsive"><table class="table table-striped">'+
         '<thead>'+
             '<tr>'+
                 '<th scope="col">Host</th>'+
@@ -41,7 +41,7 @@ function FillPlayed(played){
             '</tr>';
         count += 1;
     }
-    html += '</tbody></table>';
+    html += '</tbody></table></div>';
     $("#lastBattlesDiv").html(html);
 }
 
@@ -55,7 +55,7 @@ function FillRanking(){
             let round = data.rounds[key];
             let html = 
                 '<label>'+round.name+'</label>'+
-                '<table class="table table-striped">'+
+                '<div class="table-responsive"><table class="table table-striped">'+
                     '<thead>'+
                         '<tr>'+
                             '<th scope="col">#</th>'+
@@ -78,7 +78,7 @@ function FillRanking(){
                         '</tr>';
                 count += 1;
             }
-            html += '</tbody></table>';
+            html += '</tbody></table></div>';
             $('#rankingDiv').append(html);
         }
     });
@@ -87,7 +87,7 @@ function FillRanking(){
 function FillUpcoming(notPlayed){
     let count = 0;
     let html = 
-    '<table class="table table-striped">'+
+    '<div class="table-responsive"><table class="table table-striped">'+
         '<thead>'+
             '<tr>'+
                 '<th scope="col">Host</th>'+
@@ -110,7 +110,7 @@ function FillUpcoming(notPlayed){
             '</tr>';
         count += 1;
     }
-    html += '</tbody></table>';
+    html += '</tbody></table></div>';
     $("#upcomingBattlesDiv").html(html);
 }
 //# sourceURL=./js/home.js

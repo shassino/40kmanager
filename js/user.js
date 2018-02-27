@@ -10,7 +10,7 @@ function userOnLoad(name){
 
 function FillProfile(response){
     let html =
-        '<table class="table table-sm" style="width: 50%;">'+
+        '<div class="table-responsive"><table class="table table-sm" style="width: 50%;">'+
             '<tbody>'+
                 '<tr>'+
                     '<th scope="row">Army name: </th>'+
@@ -25,7 +25,7 @@ function FillProfile(response){
                     '<td>'+response.tokens+'</td>'+
                 '</tr>'+
             '</tbody>'+
-        '</table>'+
+        '</table></div>'+
         '<label for="listText" class="col-form-label">Army list: </label>'+
         '<div class="form-control" id="listText"></div>';
     

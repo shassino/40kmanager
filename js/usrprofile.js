@@ -46,7 +46,7 @@ function FillProfileSelector(response){
     if (response.tokens > 0){
         let html =
             '<div class="form-group">'+
-                '<table class="table table-sm" style="width: 50%;">'+
+                '<div class="table-responsive"><table class="table table-sm" style="width: 50%;">'+
                     '<tbody>'+
                         '<tr>'+
                             '<th scope="row">Army name: </th>'+
@@ -63,7 +63,7 @@ function FillProfileSelector(response){
                             '<td>'+response.tokens+'</td>'+
                         '</tr>'+
                     '</tbody>'+
-                '</table>'+
+                '</table></div>'+
                 '<label for="listText" class="col-form-label">Army list: </label>'+
                 '<textarea class="form-control" id="listText"></textarea>'+
             '</div>'+
@@ -86,7 +86,7 @@ function FillProfileSelector(response){
     }
     else {
         let html =
-            '<table class="table table-sm" style="width: 50%;">'+
+            '<div class="table-responsive"><table class="table table-sm" style="width: 50%;">'+
                 '<tbody>'+
                     '<tr>'+
                         '<th scope="row">Army name: </th>'+
@@ -101,7 +101,7 @@ function FillProfileSelector(response){
                         '<td>'+response.tokens+'</td>'+
                     '</tr>'+
                 '</tbody>'+
-            '</table>'+
+            '</table></div>'+
             '<label for="listText" class="col-form-label">Army list: </label>'+
             '<div class="form-control" id="listText"></div>';
         

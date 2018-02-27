@@ -65,7 +65,7 @@ function FillMatch(){
 
         RequestData("./php/days.php", request, function(response2){
             let html = 
-            '<table class="table table-sm" style="width: 50%;">'+
+            '<div class="table-responsive"><table class="table table-sm" style="width: 50%;">'+
                 '<tbody>'+
                     '<tr>'+
                         '<th scope="row">Championship: </th>'+
@@ -88,9 +88,9 @@ function FillMatch(){
             }
             html +=
                 '</tbody>'+
-            '</table>';
+            '</table></div>';
             html +=
-            '<table class="table table-striped">'+
+            '<div class="table-responsive"><table class="table table-striped">'+
                 '<thead>'+
                     '<tr>'+
                         '<th scope="col"></th>'+
@@ -169,7 +169,7 @@ function FillMatch(){
                     '<td>'+match.lost2+'</td>'+
                 '</tr>';
             }
-            html += '</tbody></table>';
+            html += '</tbody></table></div>';
             if (userLevel === LEVELS.Admin){
                 html += '<button type="button" id="saveMatch" class="btn btn-dark">Save</button>';
             }
