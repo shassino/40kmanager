@@ -17,20 +17,21 @@ a {
 }
 
 .main_bar {
-	position: absolute;
-	left: 0px;
-	right: 0px;
-	top: 0px;
-	height: var(--height);
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    height: var(--height);
 }
 
 .main_div {
-	position: absolute;
-	left: 0px;
-	right: 0px;
-	top: 56px;
-	bottom: 0px;
-	overflow-y: scroll;
-	background-color: rgb(207, 207, 207);
-	z-index: 0;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 56px;
+    bottom: 0px;
+    overflow-y: scroll;
+    background-color: rgb(207, 207, 207);
+    z-index: 0;
+    -webkit-overflow-scrolling: touch;
 }
