@@ -169,10 +169,20 @@ function CalcRankings(OnLoad){
 
     SetCounterCallback(rank, function(){
         /* sort rankings */
-        for (round of rankings.rounds){
-            round.users.sort(function(a, b){
+        for (key in rankings.rounds){
+            let round = rankings.rounds[key];
+
+            let sortable = new Array()
+            for (key in round.users){
+                let user = round.users[key];
+                sortable.push(user);
+            }
+
+            sortable.sort(function(a, b){
                 return b.points - a.points;
             })
+
+            round.users = sortable;
         }
 
         OnLoad(rankings);
