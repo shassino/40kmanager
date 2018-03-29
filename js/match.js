@@ -171,7 +171,7 @@ function FillMatch(){
             }
             html += '</tbody></table></div>';
             if (userLevel === LEVELS.Admin){
-                html += '<button type="button" id="saveMatch" class="btn btn-dark">Save</button>';
+                html += '<button type="button" id="saveMatch" class="btn btn-dark" data-toggle="tooltip" title="">Save</button>';
             }
             $("#resultDiv").html(html);
 
@@ -195,10 +195,38 @@ function FillMatch(){
                         AppendLog("Result updated");
                         FillMatch();
                     }); 
+                });
+
+                let request = {};
+                request.session = GetSessionId();
+                request.username = match.p1;
+                request.operation = "getprofile";
+                RequestData("./php/users.php", request, function(response){
+                    if ((response.list == null) || (response.list == "")){
+                        DisableButtons(request.username);
+                    }
+                });
+
+                let request2 = {};
+                request2.username = match.p2;
+                request2.operation = "getprofile";
+                RequestData("./php/users.php", request2, function(response){
+                    if ((response.list == null) || (response.list == "")){
+                        DisableButtons(request2.username);
+                    }
                 }); 
             }
         });
     });
+}
+
+function DisableButtons(player){
+    $('#saveMatch').prop("disabled", true);
+    $('#saveMatch').addClass("disabled");
+
+    $('#saveReport').prop("disabled", true);
+    $('#saveReport').addClass("disabled");
+    AppendLog('Player '+player+' need to submit a list before playing match');
 }
 
 function CalcResult(request){
