@@ -191,7 +191,7 @@ function LoadCss(item){
 }
 
 function RequestData(url, request, OnLoad){
-    $.post(url, JSON.stringify(request), function(data, status, xhr){
+    $.post(url, JSON.stringify(request).escapeSpecialChars(), function(data, status, xhr){
         if (status == "error"){
             //handle failure
             AppendLog('Unable to contact server');
