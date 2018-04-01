@@ -94,7 +94,7 @@ try {
             $tokens = $row['tokens'];
             if ($tokens > 0){
                 $tokens -= 1;
-                $queryString = 'UPDATE profiles SET armyname="'.$post->armyname.'", list='.$db->quote($post->list).', tokens='.$tokens.' WHERE username="'.$username.'"';
+                $queryString = 'UPDATE profiles SET armyname='.$db->quote($post->armyname).', list='.$db->quote($post->list).', tokens='.$tokens.' WHERE username="'.$username.'"';
             }
             else {
                 $response->status = "Error: no more update tokens availables";

@@ -43,6 +43,7 @@ function FillFactionSelector(){
 }
 
 function FillProfileSelector(response){
+    let armyname = response.armyname;
     if (response.tokens > 0){
         let html =
             '<div class="form-group">'+
@@ -51,7 +52,7 @@ function FillProfileSelector(response){
                         '<tr>'+
                             '<th scope="row">Army name: </th>'+
                             '<td>'+
-                                '<input type="text" class="form-control" id="armynameInput" value="'+response.armyname+'">'+
+                                '<input type="text" class="form-control" id="armynameInput" value="'+armyname+'">'+
                             '</td>'+
                         '</tr>'+
                         '<tr>'+
@@ -94,7 +95,7 @@ function FillProfileSelector(response){
                 $('#modalConfirm').click(function(){
                     let request = {};
                     request.session = GetSessionId();
-                    request.armyname = $('#armynameInput').val();
+                    request.armyname = $('#armynameInput').val().escapeQuotes();
                     request.list = tinymce.activeEditor.getContent();
                     request.operation = "setprofile";
                     RequestData("./php/users.php", request, function(response){
@@ -111,7 +112,7 @@ function FillProfileSelector(response){
                 '<tbody>'+
                     '<tr>'+
                         '<th scope="row">Army name: </th>'+
-                        '<td>'+response.armyname+'</td>'+
+                        '<td>'+armyname+'</td>'+
                     '</tr>'+
                     '<tr>'+
                         '<th scope="row">Faction: </th>'+

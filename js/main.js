@@ -178,7 +178,7 @@ function LoadCss(item){
     $.ajax({
         url: './style/'+item+'.css',
         /*dataType: 'css',*/
-        success: function(){                  
+        success: function(){
             $('<link rel="stylesheet" type="text/css" href="./style/'+item+'.css" />').appendTo("head");
         },
         error: function(xhr, status, error){

@@ -261,3 +261,7 @@ String.prototype.escapeSpecialChars = function() {
                .replace(/\\b/g, "\\b")
                .replace(/\\f/g, "\\f");
 };
+
+String.prototype.escapeQuotes = function() {
+    return this.replace(/\"/g, '\"');
+};

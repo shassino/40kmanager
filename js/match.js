@@ -17,7 +17,7 @@ function matchOnLoad(param){
             request.report = tinymce.activeEditor.getContent();
 
             RequestData("./php/matches.php", request, function(response){
-                AppendLog("Report saved");         
+                AppendLog("Report saved");
             });
         });
     }
