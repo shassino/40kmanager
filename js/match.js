@@ -231,20 +231,25 @@ function DisableButtons(player){
 
 function CalcResult(request){
     var response = {};
-    if (request.obj1 > request.obj2){
+    let obj1 = Number(request.obj1);
+    let obj2 = Number(request.obj2);
+    let sec1 = Number(request.sec1);
+    let sec2 = Number(request.sec2);
+
+    if (obj1 > obj2){
         response.pt1 = 5;
         response.pt2 = 1;
     }
-    else if (request.obj1 < request.obj2){
+    else if (obj1 < obj2){
         response.pt1 = 1;
         response.pt2 = 5;
     }
     else {
-        if (request.sec1 > request.sec2){
+        if (sec1 > sec2){
             response.pt1 = 4;
             response.pt2 = 2;
         }
-        else if (request.sec2 > request.sec1){
+        else if (sec2 > sec1){
             response.pt1 = 2;
             response.pt2 = 4;
         }
